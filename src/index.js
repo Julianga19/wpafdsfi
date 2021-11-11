@@ -24,6 +24,7 @@ connection.connect();
 const port = process.env.PORT || 8080;
 
 const app = express()
+  .use(express.static('./dist/bet'))
   .use(cors())
   .use(bodyParser.json())
   .use(events(connection))
@@ -33,7 +34,6 @@ const app = express()
   .use(limit(connection))
   .use(users(connection));
 
-app.use(express.static('./dist/bet'));
 app.get('/*', (req, res) => {
   res.sendFile('index.html',{root: 'dist/bet/'});
 });
