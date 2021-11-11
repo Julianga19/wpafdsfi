@@ -1,0 +1,9 @@
+<div>
+    <label class="title">usuario</label>
+    <input class="input" [(ngModel)]="user" maxlength="20"/>
+</div>
+<div>
+    <label class="title">contrasena</label>
+    <input class="input" type="password" [(ngModel)]="pwd" maxlength="20"/>
+</div>
+<button type="button" (click)="login()">Entrar</button>

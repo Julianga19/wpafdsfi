@@ -1,0 +1,97 @@
+<button (click)="forbidden()">Prohibidos</button>
+<button (click)="winners()">Ganadores</button>
+<button (click)="limits()">Cubrir</button>
+<div class="main">
+    <div>
+        <label for="exampleDataList" class="form-label">Código</label>
+        <input class="form-control" list="codeOptions" id="exampleDataList" [(ngModel)]="vendorCode" >
+        <datalist id="codeOptions">            
+            <option *ngFor="let code of codes" [value]="code.code">{{code.code}}</option>
+        </datalist>        
+    </div>    
+    <div>
+        <label class="title">Loterias del dia</label>
+        <div style="display: flex;">
+            <div class="form-check">            
+                <input class="form-check-input" type="checkbox" [checked]="this.isAllLoteries" (click)="all()" value="" id="flexCheckDefault">
+                <label class="check-label" for="flexCheckDefault">
+                    Todas
+                </label>
+            </div>  
+            <div *ngFor="let loterie of this.loteries">            
+                <div class="form-check">            
+                    <input class="form-check-input" id="{{loterie.code}}"  type="checkbox" [checked]="loterie.checked" (click)="selected(loterie)" value="" id="flexCheckDefault">
+                    <label class="check-label" for="flexCheckDefault">
+                        {{loterie.name}}
+                    </label>
+                </div>                
+            </div>
+        </div>
+        <label class="title">Opciones</label>
+        <div style="display: flex;">
+            <div>            
+                <div class="form-check">            
+                    <input class="form-check-input" type="checkbox" (click)="lastThree()" [checked]="this.isLastThree" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Tres últimas
+                    </label>
+                </div>                
+                <div *ngIf="isLastThree">
+                    <label class="title">Valor</label>
+                    <input class="input" (keyup.enter)="onEnterLTPrice()" [(ngModel)]="priceLt"/>
+                </div>    
+            </div>            
+            <div>            
+                <div class="form-check">            
+                    <input class="form-check-input" type="checkbox" (click)="cuna()" [checked]="this.isCuna"  value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Cuña
+                    </label>
+                </div>                
+                <div *ngIf="isCuna">
+                    <label class="title">Valor</label>
+                    <input class="input" (keyup.enter)="onEnterCunaPrice()"  [(ngModel)]="priceCuna"/>
+                </div>
+            </div>
+            <div>            
+                <div class="form-check">            
+                    <input class="form-check-input" type="checkbox" value="" (click)="combined()" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Combinado
+                    </label>
+                </div>                
+            </div>
+        </div>
+        <div>
+            <label class="title">Número</label>
+            <input class="input" [(ngModel)]="number" (keyup.enter)="onEnter()" minlength="3" maxlength="4"/>
+        </div>
+        <div>
+            <label class="title">Valor</label>
+            <input class="input" (keyup.enter)="onEnterPrice()"  pattern = "[0-9]" [(ngModel)]="price"/>
+        </div>    
+        <div>
+            <label class="title">Total</label>
+            <input class="input" disabled [(ngModel)]="total"/>
+        </div>    
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Número</th>            
+            <th scope="col">Valor</th>
+            <th scope="col">Eliminar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let value of this.numbersAddedLst">
+            <td>{{value.number}}</td>            
+            <td>{{value.price}}</td>
+            <td (click)="delete(value)">x</td>
+        </tr>      
+        </tbody>
+    </table>
+</div>
+<button type="button" (click)="save()">Guardar</button>
+<button type="button" (click)="clearAllData()">limpiar</button>

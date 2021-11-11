@@ -1,0 +1,42 @@
+<button (click)="main()">Principal</button>
+<div>
+    <label for="loteryList" class="form-label">Lotería</label>
+    <input class="form-control" list="codeOptions" id="loteryList" (change)="change($event)" >
+    <datalist id="codeOptions">            
+        <option *ngFor="let lotery of loteries">{{lotery.name}}</option>
+    </datalist>        
+</div>    
+<div>
+    <label class="title">Número</label>
+    <input class="input" [(ngModel)]="numberWinner" maxlength="4"/>
+</div>
+<div>
+    <label class="title">Fecha</label>
+    <input type="date" [(ngModel)]="date"/>
+</div>
+<button type="button" (click)="find()">Buscar</button>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Número</th>        
+        <th scope="col">Juego</th>  
+        <th scope="col">Valor</th>  
+        <th scope="col">Lotería</th>
+        <th scope="col">Vendedor</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Usuario</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let value of this.winnerList">
+        <td>{{value.number}}</td>        
+        <td>{{value.type}}</td>      
+        <td>{{value.value}}</td>        
+        <td>{{value.name}}</td>        
+        <td>{{value.vendor_code}}</td>  
+        <td>{{value.DATE | date:'short'}}</td>
+        <td>{{value.USERNAME}}</td>
+    </tr>      
+    </tbody>
+</table>
