@@ -20,6 +20,9 @@ const connection = mysql.createConnection({
 });
 
 connection.connect();
+setInterval(function () {
+  connection.query('SELECT 1');
+}, 5000);
 
 const port = process.env.PORT || 8080;
 

@@ -1,21 +1,32 @@
-<button (click)="main()">Principal</button>
-<div>
-    <label class="title">Número</label>
-    <input class="input" [(ngModel)]="newNumber" maxlength="4"/>
+<div class="container">
+    <div class="container__menu">
+        <button class="bttn bttn-primary" (click)="main()">Principal</button>        
+    </div>
+    <div class="container__content">
+        <div>
+            <div class="card">
+                <label class="input-label">Número</label>
+                <input class="form-control" [(ngModel)]="newNumber" maxlength="4"/>
+                <div class="full-width">
+                    <button type="button" class="bttn bttn-primary" (click)="save()">Agregar</button>                    
+                </div>          
+            </div>
+            <div class="card">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Número</th>        
+                        <th scope="col">Eliminar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let value of this.forbiddenLst">
+                        <td>{{value.number}}</td>        
+                        <td><button type="button" class="btn btn-danger" (click)="delete(value)">Eliminar</button></td>                                                    
+                    </tr>      
+                    </tbody>
+                </table>                
+            </div>
+        </div>
+    </div>
 </div>
-<button type="button" (click)="save()">Agregar</button>
-
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">Número</th>        
-        <th scope="col">Eliminar</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let value of this.forbiddenLst">
-        <td>{{value.number}}</td>        
-        <td (click)="delete(value)">x</td>
-    </tr>      
-    </tbody>
-</table>

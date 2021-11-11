@@ -1,0 +1,76 @@
+@import "abstracts/variables";
+@import "components/button";
+@import "components/card";
+@import "components/checkbox";
+@import "components/input";
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: sans-serif;
+    height: 100vh;
+    position: relative;
+    background: #FAFAFA;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    width: 100%;
+    height: 100vh;
+
+    &__menu {
+        display: flex;
+        flex-direction: column;
+        width: 15%;
+        padding: 1.5rem;
+        justify-content: center;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        width: 85%;
+        // background: blue;
+        padding: 2rem 3rem;
+    }
+
+    .form-container {
+        display: flex;
+
+        & .form {
+            display: flex;
+            width: 30%;
+        }
+
+        & .table-container {
+            display: flex;
+            width: 70%;
+            padding-left: 2rem;
+        }
+    }
+
+    .full-width {
+        width: 100%;
+    }
+
+
+    table > tbody > tr {
+        font-size: 1.6rem;
+    }
+
+    table > thead > tr {
+        font-size: 1.8rem;
+    }
+}

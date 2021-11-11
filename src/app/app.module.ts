@@ -10,6 +10,7 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { WinnerComponent } from './winner/winner.component';
 import { LimitsComponent } from './limits/limits.component';
 import { LoginComponent } from './login/login.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { LoginComponent } from './login/login.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

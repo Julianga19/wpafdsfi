@@ -1,97 +1,114 @@
-<button (click)="forbidden()">Prohibidos</button>
-<button (click)="winners()">Ganadores</button>
-<button (click)="limits()">Cubrir</button>
-<div class="main">
-    <div>
-        <label for="exampleDataList" class="form-label">Código</label>
-        <input class="form-control" list="codeOptions" id="exampleDataList" [(ngModel)]="vendorCode" >
-        <datalist id="codeOptions">            
-            <option *ngFor="let code of codes" [value]="code.code">{{code.code}}</option>
-        </datalist>        
-    </div>    
-    <div>
-        <label class="title">Loterias del dia</label>
-        <div style="display: flex;">
-            <div class="form-check">            
-                <input class="form-check-input" type="checkbox" [checked]="this.isAllLoteries" (click)="all()" value="" id="flexCheckDefault">
-                <label class="check-label" for="flexCheckDefault">
+<div class="container">
+    <div class="container__menu">
+        <button class="bttn bttn-primary"  (click)="forbidden()">Prohibidos</button>
+        <button class="bttn bttn-primary" (click)="winners()">Ganadores</button>
+        <button class="bttn bttn-primary" (click)="limits()">Cubrir</button>        
+    </div>
+    <div class="container__content">
+        <div>
+            <div class="card">
+                <label for="exampleDataList" class="input-label">Código</label>
+                <input class="form-control" list="codeOptions" id="exampleDataList" [(ngModel)]="vendorCode" >
+                <datalist id="codeOptions">            
+                    <option *ngFor="let code of codes" [value]="code.code">{{code.code}}</option>
+                </datalist>        
+            </div>    
+        <div>
+        <div class="card">
+            <label class="input-label">Loterias del dia</label>            
+            <div class="label-checkbox">
+                <label class="label-checkbox">
+                    <input class="chkbox" type="checkbox" [checked]="this.isAllLoteries" (click)="all()" value="" id="flexCheckDefault">
                     Todas
-                </label>
+                </label>            
             </div>  
-            <div *ngFor="let loterie of this.loteries">            
-                <div class="form-check">            
-                    <input class="form-check-input" id="{{loterie.code}}"  type="checkbox" [checked]="loterie.checked" (click)="selected(loterie)" value="" id="flexCheckDefault">
-                    <label class="check-label" for="flexCheckDefault">
+            <div class="row" *ngFor="let loterie of this.loteries">            
+                <div class="label-checkbox">
+                    <label class="label-checkbox">
+                        <input class="chkbox" id="{{loterie.code}}"  type="checkbox" [checked]="loterie.checked" (click)="selected(loterie)" value="" id="flexCheckDefault">
                         {{loterie.name}}
-                    </label>
-                </div>                
+                    </label>            
+                </div>                  
+            </div>            
+        </div>
+        <div class="card">
+            <label class="input-label">Opciones</label>                                    
+                <div class="label-checkbox">
+                    <label class="label-checkbox">
+                        <input class="chkbox" type="checkbox" [checked]="this.isLastThree" (click)="lastThree()" value="" id="flexCheckDefault">                        
+                        Tres últimas
+                    </label>            
+                    <div *ngIf="isLastThree">
+                        <label class="title">Valor</label>
+                        <input class="input" (keyup.enter)="onEnterLTPrice()" [(ngModel)]="priceLt"/>
+                    </div>    
+                </div>                  
+                <div class="label-checkbox">
+                    <label class="label-checkbox">
+                        <input class="chkbox" type="checkbox" (click)="cuna()" [checked]="this.isCuna"  value="" id="flexCheckDefault">                        
+                        Cuña
+                    </label>            
+                    <div *ngIf="isCuna">
+                        <label class="title">Valor</label>
+                        <input class="input" (keyup.enter)="onEnterCunaPrice()"  [(ngModel)]="priceCuna"/>
+                    </div>
+                </div>                                  
+                <div class="label-checkbox">
+                    <label class="label-checkbox">
+                        <input class="chkbox" type="checkbox" value="" (click)="combined()" id="flexCheckDefault">                        
+                        Combinado
+                    </label>                                
+                </div>                                  
             </div>
         </div>
-        <label class="title">Opciones</label>
-        <div style="display: flex;">
-            <div>            
-                <div class="form-check">            
-                    <input class="form-check-input" type="checkbox" (click)="lastThree()" [checked]="this.isLastThree" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Tres últimas
-                    </label>
-                </div>                
-                <div *ngIf="isLastThree">
-                    <label class="title">Valor</label>
-                    <input class="input" (keyup.enter)="onEnterLTPrice()" [(ngModel)]="priceLt"/>
-                </div>    
-            </div>            
-            <div>            
-                <div class="form-check">            
-                    <input class="form-check-input" type="checkbox" (click)="cuna()" [checked]="this.isCuna"  value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Cuña
-                    </label>
-                </div>                
-                <div *ngIf="isCuna">
-                    <label class="title">Valor</label>
-                    <input class="input" (keyup.enter)="onEnterCunaPrice()"  [(ngModel)]="priceCuna"/>
+        <div class="card">
+            <div class="form-container">
+                <div class="form">
+                    <div class="full-width">
+                        <div class="row">
+                            <div class="col-12">
+                                <label class="input-label">Número</label>
+                                <input type="text" class="form-control" [(ngModel)]="number" (keyup.enter)="onEnter()" minlength="3" maxlength="4">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <label class="input-label">Valor</label>
+                                <input type="text" class="form-control" (keyup.enter)="onEnterPrice()" [(ngModel)]="price">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <label class="input-label">Total</label>
+                                <input type="text" class="form-control" disabled [(ngModel)]="total">
+                            </div>
+                        </div>
+                        <div >
+                            <button type="button" class="bttn bttn-primary full-width" (click)="save()">Guardar</button>
+                            <button type="button" class="bttn bttn-primary full-width" (click)="clearAllData()">Limpiar</button>                            
+                        </div>
+                    </div>                
+                </div>
+                <div class="table-container">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Número</th>            
+                                <th>Valor</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let value of this.numbersAddedLst">
+                            <td>{{value.number}}</td>            
+                            <td>{{value.price}}</td>
+                            <td><button type="button" class="btn btn-danger" (click)="delete(value)">Eliminar</button></td>                            
+                        </tr>      
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div>            
-                <div class="form-check">            
-                    <input class="form-check-input" type="checkbox" value="" (click)="combined()" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Combinado
-                    </label>
-                </div>                
-            </div>
         </div>
-        <div>
-            <label class="title">Número</label>
-            <input class="input" [(ngModel)]="number" (keyup.enter)="onEnter()" minlength="3" maxlength="4"/>
-        </div>
-        <div>
-            <label class="title">Valor</label>
-            <input class="input" (keyup.enter)="onEnterPrice()"  pattern = "[0-9]" [(ngModel)]="price"/>
-        </div>    
-        <div>
-            <label class="title">Total</label>
-            <input class="input" disabled [(ngModel)]="total"/>
-        </div>    
+    </div>        
     </div>
-
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Número</th>            
-            <th scope="col">Valor</th>
-            <th scope="col">Eliminar</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let value of this.numbersAddedLst">
-            <td>{{value.number}}</td>            
-            <td>{{value.price}}</td>
-            <td (click)="delete(value)">x</td>
-        </tr>      
-        </tbody>
-    </table>
 </div>
-<button type="button" (click)="save()">Guardar</button>
-<button type="button" (click)="clearAllData()">limpiar</button>

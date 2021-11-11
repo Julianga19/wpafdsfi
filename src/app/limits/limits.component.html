@@ -1,45 +1,46 @@
-<button (click)="main()">Principal</button>
-<div>
-    <label class="title">Valor</label>
-    <input class="input" [(ngModel)]="maxValue" maxlength="4"/>
-</div>
-<div class="form-check">            
-    <input class="form-check-input" type="checkbox" (click)="three()" value="" id="flexCheckDefault">
-    <label class="form-check-label" for="flexCheckDefault">
-        Tres Cifras
-    </label>
-</div>                
-<div class="form-check">            
-    <input class="form-check-input" type="checkbox" (click)="four()" value="" id="flexCheckDefault">
-    <label class="form-check-label" for="flexCheckDefault">
-        Cuatro cifras
-    </label>
-</div>                
-
-<div>
-    <label class="title">Fecha</label>
-    <input type="date" [(ngModel)]="date"/>
-</div>
-<button type="button" (click)="find()">Buscar</button>
-<button type="button" (click)="cover()">Cubrir</button>
-
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">Número</th>        
-        <th scope="col">Lotería</th>     
-        <th scope="col">Valor Total</th> 
-        <th scope="col">Valor Pasado</th>        
-        <th scope="col">Pendiente Cubrir</th>        
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let value of this.passedList">
-        <td>{{value.NUMBER}}</td>        
-        <td>{{value.NAME}}</td>        
-        <td>{{value.SUMA}}</td>          
-        <td>{{value.SUMA-maxValue}}</td>  
-        <td>{{value.SUMA-value.COVERED-maxValue}}</td> 
-    </tr>      
-    </tbody>
-</table>
+<div class="container">
+    <div class="container__menu">
+        <button class="bttn bttn-primary" (click)="main()">Principal</button>        
+    </div>
+    <div class="container__content">
+        <div>
+            <div class="card">
+                <label class="input-label">Valor</label>
+                <input type="text" class="form-control" [(ngModel)]="maxValue">
+                <label class="label-checkbox">
+                    <input class="chkbox" type="checkbox" (click)="three()" value="" id="flexCheckDefault">                        
+                    Tres Cifras
+                </label>            
+                <label class="label-checkbox">
+                    <input class="chkbox" type="checkbox" (click)="four()" value="" id="flexCheckDefault">                        
+                    Cuatro Cifras
+                </label>  
+                <label class="input-label">Fecha</label>
+                <input type="date" class="form-control" [(ngModel)]="date">    
+                <div class="full-width">                    
+                    <button type="button"  class="bttn bttn-primary" (click)="find()">Buscar</button>
+                    <button type="button"  class="bttn bttn-primary" (click)="cover()">Cubrir</button>      
+                </div>                
+            </div>
+            <div class="card">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Número</th>        
+                        <th scope="col">Lotería</th>     
+                        <th scope="col">Valor Total</th> 
+                        <th scope="col">Valor Pasado</th>        
+                        <th scope="col">Pendiente Cubrir</th>        
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let value of this.passedList">
+                        <td>{{value.NUMBER}}</td>        
+                        <td>{{value.NAME}}</td>        
+                        <td>{{value.SUMA}}</td>          
+                        <td>{{value.SUMA-maxValue}}</td>  
+                        <td>{{value.SUMA-value.COVERED-maxValue}}</td> 
+                    </tr>      
+                    </tbody>
+                </table>
+            </div>

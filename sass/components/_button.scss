@@ -1,0 +1,24 @@
+.bttn {
+    border-radius: 100px;
+    outline: none;
+    border: none;
+    margin-bottom: 1rem;
+    height: 3rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.bttn-primary {
+    background: $dark-blue;
+    color: white;
+}
+
+.bttn-primary:hover {
+    background: $blue;
+}
+
+.bttn-danger {
+    background: orangered;
+    color: white;
+}
+
