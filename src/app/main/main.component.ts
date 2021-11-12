@@ -273,7 +273,7 @@ export class MainComponent implements OnInit {
     this.isCuna = !this.isCuna;
     if(this.isCuna){
       for(let numbers of this.numbersAddedLst){                                    
-        if(numbers.number.length > 2){
+        if(numbers.type == 'Derecho' && numbers.number.length > 2){
           const cuna = numbers.number.substr(numbers.number.length-2,numbers.number.length);
           const cunaModel = {number: cuna , price: 0, isCuna: true, type: 'Cuña'};
           const index = this.numbersAddedLst.indexOf(cunaModel);
