@@ -24,6 +24,7 @@ export class MainComponent implements OnInit {
   vendorCode;
   isLastThree;
   isCuna;
+  isCombined;
   forbiddenNumbers;
   total = 0;
   codes;
@@ -32,6 +33,8 @@ export class MainComponent implements OnInit {
   priceCuna;
   isAdmin; 
   isLogged;
+  priceCombined3=0;
+  priceCombined4=0;
 
   constructor(
     private server : ServerService,
@@ -122,7 +125,6 @@ export class MainComponent implements OnInit {
     }
     this.priceLt = undefined;
   }
-
   
   onEnterCunaPrice(){
     this.total=0;
@@ -135,6 +137,32 @@ export class MainComponent implements OnInit {
       }
     }
     this.priceCuna = undefined;
+  }
+
+  onEnterCombined3Price(){
+    this.total=0;
+    for(let lotery of this.loteriesSelected){
+      for(let numbers of this.numbersAddedLst){        
+        if(numbers.type != 'Combinado'){       
+          this.total += +numbers.price;
+        }
+      }
+      this.total += +this.priceCombined3 + +this.priceCombined4;
+    }    
+    this.combined3();
+  }
+
+  onEnterCombined4Price(){
+    this.total=0;
+    for(let lotery of this.loteriesSelected){
+      for(let numbers of this.numbersAddedLst){ 
+        if(numbers.type != 'Combinado'){       
+          this.total += +numbers.price;
+        }
+      }
+      this.total += +this.priceCombined4 + +this.priceCombined3;;
+    }    
+    this.combined4();
   }
 
   onEnterPrice(){
@@ -170,34 +198,59 @@ export class MainComponent implements OnInit {
   }
 
   combined(){
-    let combinedLst = [];    
-    const a = this.number[0];
-    const b = this.number[1];
-    const c = this.number[2];
-    const d = this.number[3];
-    this.numbersAddedLst.push({number: a+b+d+c, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: a+c+b+d, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: a+c+d+b, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: a+d+b+c, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: a+d+c+b, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: b+a+c+d, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: b+a+d+c, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: b+c+a+d, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: b+c+d+a, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: b+d+a+c, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: b+d+c+a, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: c+a+b+d, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: c+a+d+b, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: c+b+a+d, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: c+b+d+a, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: c+d+a+b, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: c+d+b+a, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: d+a+b+c, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: d+a+c+b, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: d+b+a+c, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: d+b+c+a, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: d+c+a+b, price: 0, type: 'Combinado'});                  
-    this.numbersAddedLst.push({number: d+c+b+a, price: 0, type: 'Combinado'});                  
+    this.isCombined = !this.isCombined;    
+    if(!this.isCombined){
+      this.total = this.total - this.priceCombined3 - this.priceCombined4;
+    }
+  }
+
+  combined3(){    
+    for(let numbers of this.numbersAddedLst){
+      if(numbers.type == 'Directo'){
+        const a = numbers.number[0];
+        const b = numbers.number[1];
+        const c = numbers.number[2];
+        this.numbersAddedLst.push({number: a+c+b, price: this.priceCombined3, type: 'Combinado', isCombined3: true});                  
+        this.numbersAddedLst.push({number: b+a+c, price: this.priceCombined3, type: 'Combinado', isCombined3: true});                  
+        this.numbersAddedLst.push({number: b+c+a, price: this.priceCombined3, type: 'Combinado', isCombined3: true});                  
+        this.numbersAddedLst.push({number: c+a+b, price: this.priceCombined3, type: 'Combinado', isCombined3: true});                  
+        this.numbersAddedLst.push({number: c+b+a, price: this.priceCombined3, type: 'Combinado', isCombined3: true});                  
+      }
+    }
+  }
+
+  combined4(){    
+    for(let numbers of this.numbersAddedLst){
+      if(numbers.type == 'Directo'){
+      const a = numbers.number[0];
+      const b = numbers.number[1];
+      const c = numbers.number[2];
+      const d = numbers.number[3];
+      this.numbersAddedLst.push({number: a+b+d+c, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: a+c+b+d, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: a+c+d+b, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: a+d+b+c, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: a+d+c+b, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: b+a+c+d, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: b+a+d+c, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: b+c+a+d, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: b+c+d+a, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: b+d+a+c, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: b+d+c+a, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: c+a+b+d, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: c+a+d+b, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: c+b+a+d, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: c+b+d+a, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: c+d+a+b, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: c+d+b+a, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: d+a+b+c, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: d+a+c+b, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: d+b+a+c, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: d+b+c+a, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: d+c+a+b, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                  
+      this.numbersAddedLst.push({number: d+c+b+a, price: this.priceCombined4, type: 'Combinado', isCombined4: true});                      
+      }
+    }
   }
 
   cuna(){

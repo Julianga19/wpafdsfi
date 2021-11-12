@@ -28,29 +28,35 @@
                     <div class="label-checkbox">
                         <label class="label-checkbox">
                             <input class="chkbox" type="checkbox" [checked]="this.isLastThree" (click)="lastThree()" value="" id="flexCheckDefault">                        
-                            Tres últimas
-                            <div *ngIf="isLastThree">
-                                <label >Valor</label>
-                                <input (keyup.enter)="onEnterLTPrice()" [(ngModel)]="priceLt"/>
-                            </div>    
+                            Tres últimas                      
                         </label>                                    
+                    </div>                                      
+                    <div class="label-checkbox" *ngIf="isLastThree">
+                        <label >Valor</label>
+                        <input  class="form-control" (keyup.enter)="onEnterLTPrice()" [(ngModel)]="priceLt"/>
                     </div>                  
                     <div class="label-checkbox">
                         <label class="label-checkbox">
                             <input class="chkbox" type="checkbox" (click)="cuna()" [checked]="this.isCuna"  value="" id="flexCheckDefault">                        
                             Cuña
-                        </label>            
-                        <div *ngIf="isCuna">
-                            <label class="input-label">Valor</label>
-                            <input class="form-control" (keyup.enter)="onEnterCunaPrice()"  [(ngModel)]="priceCuna"/>
-                        </div>
-                    </div>                                  
+                        </label>                                    
+                    </div>    
+                    <div  class="label-checkbox" *ngIf="isCuna">
+                        <label>Valor</label>
+                        <input class="form-control" (keyup.enter)="onEnterCunaPrice()"  [(ngModel)]="priceCuna"/>
+                    </div>                                              
                     <div class="label-checkbox">
                         <label class="label-checkbox">
-                            <input class="chkbox" type="checkbox" value="" (click)="combined()" id="flexCheckDefault">                        
+                            <input class="chkbox" type="checkbox" value="" [checked]="this.isCombined" (click)="combined()" id="flexCheckDefault">                        
                             Combinado
                         </label>                                
-                    </div>                                  
+                    </div>                                            
+                    <div  class="label-checkbox" *ngIf="isCombined">
+                        <label>Valor 3 </label>
+                        <input class="form-control" (keyup.enter)="onEnterCombined3Price()"  [(ngModel)]="priceCombined3"/>
+                        <label>Valor 4 </label>
+                        <input class="form-control" (keyup.enter)="onEnterCombined4Price()"  [(ngModel)]="priceCombined4"/>
+                    </div>                                              
                 </div>        
             <div class="card">
                 <div class="form-container">
