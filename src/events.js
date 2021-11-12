@@ -5,10 +5,11 @@ function createRouter(db) {
   const owner = '';
 
   // the routes are defined here
-  router.post('/event', (req, res, next) => {        
+  router.post('/event', (req, res, next) => {    
+    var date = new Date();    
     db.query(
       'INSERT INTO bets (NUMBER, VALUE, DATE, LOTERY_CODE, VENDOR_CODE, USERNAME, TYPE) VALUES (?,?,?,?,?,?, ?)',
-      [req.body.number, req.body.value, req.body.today, req.body.loteryCode, req.body.vendorCode, req.body.userName, req.body.type],
+      [req.body.number, req.body.value, new Date(date.toLocaleDateString() + ' ' + date.toLocaleTimeString() + ' GMT+0500'), req.body.loteryCode, req.body.vendorCode, req.body.userName, req.body.type],
       (error) => {
         if (error) {
           console.error(error);
