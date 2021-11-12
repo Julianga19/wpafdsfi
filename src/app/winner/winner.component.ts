@@ -12,7 +12,7 @@ export class WinnerComponent implements OnInit {
 
   numberWinner;
   date;
-  winnerList;
+  winnerList = [];
   loteries : Lotery[] = [];
   loteryCode;
   isLogged;
@@ -31,9 +31,29 @@ export class WinnerComponent implements OnInit {
     });
   }
 
-  find(){    
-    this.server.getWinners(this.numberWinner, this.date, this.loteryCode).then((response) => {      
-      this.winnerList = response
+  find(){  
+    this.winnerList = [];  
+    this.server.getWinners(this.numberWinner, this.date, this.loteryCode).then((response: any) => {      
+      for(const data of response) {        
+        if(data.number.length == 4){
+          if(data.type == 'Derecho' || data.type == 'Directo' ){
+            data.prize = data.value * 4500;
+          } else {
+            data.prize = data.value * 200;
+          }
+        if(data.number.length == 3){
+          if(data.type == 'Derecho' || data.type == 'Directo' ){
+            data.prize = data.value * 560;
+          } else {
+            data.prize = data.value * 116;
+          }
+        }
+        if(data.number.length == 2){
+          data.prize = data.value * 50;
+        }
+        this.winnerList.push(data);
+      }
+    }
     });
   }
 
@@ -45,5 +65,6 @@ export class WinnerComponent implements OnInit {
     let name = e.target.value;
     let list = this.loteries.filter(x => x.name === name)[0];
     this.loteryCode = list.code;
-  }
+  }  
+
 }
