@@ -42,7 +42,7 @@ export class MainComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {    
-    this.isAdmin = sessionStorage.getItem('isAdmin');
+    this.isAdmin = sessionStorage.getItem('isAdmin') == "0" ? false : true; 
     if(this.isAdmin){
       this.verify();
     }
