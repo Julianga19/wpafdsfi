@@ -29,7 +29,7 @@
     background: white;
     padding: 2rem;
     border-radius: 5px;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
   }
   
   .chkbox {
@@ -40,9 +40,10 @@
   }
   
   .label-checkbox {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     margin-right: 1rem;
-    line-height: 3;
+    line-height: 3;   
+    display: inline-block; 
   }
   
   .form-control {
@@ -58,6 +59,7 @@
   }
   
   .input-label {
+    font-weight:bold;
     display: block;
     font-size: 1.6rem;
     margin-bottom: 0.5rem;
@@ -100,7 +102,7 @@
     display: flex;
     flex-direction: column;
     width: 85%;
-    padding: 2rem 3rem;
+    padding: 1rem 3rem;
   }
   .container .form-container {
     display: flex;
