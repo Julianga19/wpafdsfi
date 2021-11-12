@@ -132,10 +132,12 @@ export class MainComponent implements OnInit {
     this.total=0;
     for(let lotery of this.loteriesSelected){
       for(let numbers of this.numbersAddedLst){
-        if(numbers.isCuna && numbers.price == 0){
-          numbers.price = this.priceCuna;
+        if(numbers.type != 'Combinado'){       
+          if(numbers.isCuna && numbers.price == 0){
+            numbers.price = this.priceCuna;
+          }        
+          this.total += +numbers.price;
         }
-        this.total += +numbers.price;
       }
     }
     this.priceCuna = undefined;
