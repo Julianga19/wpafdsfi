@@ -298,10 +298,10 @@ export class MainComponent implements OnInit {
     }
   }
 
-  unMarkLoteries(){
-    this.loteries = [];
+  unMarkLoteries(){    
     this.server.getEvents().then((response: Lotery[]) => {
-      for(const data of response) {
+      this.loteries = [];
+      for(const data of response) {        
         if(this.loteryApplyForDay(data.dayOfWeek, data.dayOfWeekException)){
           this.loteries.push(data);
         }
