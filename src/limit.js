@@ -21,10 +21,15 @@ function createRouter(db) {
 
 
   router.get('/limit/:value/:date/:limit', function (req, res, next) {                   
-    var date = new Date();    
+    var date = new Date();
+    console.log(date);
+    var d = date.getDate();
+    var m = date.getMonth() + 1; //Month from 0 to 11
+    var y = date.getFullYear();
+    var dateParam = y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);    
     db.query(
       'SELECT * FROM (SELECT b.NUMBER , b.lotery_code, l.NAME,SUM(VALUE) AS SUMA, (SELECT COALESCE(SUM(c.VALUE),0) FROM covered c WHERE b.number = c.number and b.LOTERY_CODE = c.LOTERY_CODE AND DATE_FORMAT(c.date,"%Y-%m-%d")=?) as COVERED FROM bets b INNER JOIN lotery l on b.lotery_code = l.code WHERE DATE_FORMAT(b.date, "%Y-%m-%d")= ? AND b.type not in ("Cuña", "Combinado") GROUP BY LOTERY_CODE, NAME, b.number) AS TAB WHERE SUMA >= ? AND LENGTH(NUMBER)= ? ',
-      [new Date(date.toLocaleDateString() + ' ' + date.toLocaleTimeString() + ' GMT-0000').toUTCString(),req.params.date, req.params.value, req.params.limit],
+      [dateParam,req.params.date, req.params.value, req.params.limit],
       (error, results) => {
         if (error) {
           console.log(error);

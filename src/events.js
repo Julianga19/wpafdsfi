@@ -6,7 +6,9 @@ function createRouter(db) {
 
   // the routes are defined here
   router.post('/event', (req, res, next) => {    
-    var date = new Date();    
+    var date = new Date();
+    console.log(date.toLocaleDateString());
+    console.log(new Date(date.toLocaleDateString() + ' ' + date.toLocaleTimeString() + ' GMT-0000').toUTCString());
     db.query(
       'INSERT INTO bets (NUMBER, VALUE, DATE, LOTERY_CODE, VENDOR_CODE, USERNAME, TYPE) VALUES (?,?,?,?,?,?, ?)',
       [req.body.number, req.body.value, new Date(date.toLocaleDateString() + ' ' + date.toLocaleTimeString() + ' GMT-0000').toUTCString(), req.body.loteryCode, req.body.vendorCode, req.body.userName, req.body.type],
