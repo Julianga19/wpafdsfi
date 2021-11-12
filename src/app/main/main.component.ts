@@ -305,29 +305,34 @@ export class MainComponent implements OnInit {
   }
 
   save(){
-    if(this.vendorCode){
-      if(this.loteriesSelected.length != 0){
-        if(this.numbersAddedLst.length != 0){
-          if(this.total != 0){
-            for(const number of this.numbersAddedLst){
-              for(const lot of this.loteriesSelected){
-                let game: Game = { loteryCode: lot.code, number: number.number, value: number.price, 
-                  vendorCode: this.vendorCode, userName: sessionStorage.getItem('user'), type: number.type, today: new Date()};
-                this.server.createEvent(game);
+    const user = sessionStorage.getItem('user');
+    if(user){
+      if(this.vendorCode){
+        if(this.loteriesSelected.length != 0){
+          if(this.numbersAddedLst.length != 0){
+            if(this.total != 0){
+              for(const number of this.numbersAddedLst){
+                for(const lot of this.loteriesSelected){
+                  let game: Game = { loteryCode: lot.code, number: number.number, value: number.price, 
+                    vendorCode: this.vendorCode, userName: user, type: number.type, today: new Date()};
+                  this.server.createEvent(game);
+                }
               }
+              this.clearAllData();
+            } else {
+              alert('El total apostado debe ser mayor a 0');    
             }
-            this.clearAllData();
           } else {
-            alert('El total apostado debe ser mayor a 0');    
+            alert('Debe ingresar al menos un número');  
           }
         } else {
-          alert('Debe ingresar al menos un número');  
+          alert('Debe seleccionar al menos una lotería');  
         }
       } else {
-        alert('Debe seleccionar al menos una lotería');  
-      }
-    } else {
-      alert('Debe seleccionar un codigo');
+        alert('Debe seleccionar un codigo');
+      } 
+    }else {
+      alert('Se perdió la sesion, por favor ingrese de nuevo');
     }
   }
 
