@@ -146,10 +146,16 @@ export class MainComponent implements OnInit {
     for(let lotery of this.loteriesSelected){
       for(let numbers of this.numbersAddedLst){        
         if(numbers.type != 'Combinado'){       
-          this.total += +numbers.price;
+          if((numbers.number.length ==4 && lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE') || numbers.number.length == 3){
+            this.total += +numbers.price;
+          }
         }
       }
-      this.total += +this.priceCombined3 + +this.priceCombined4;
+      if(lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE'){
+        this.total += +this.priceCombined4 + +this.priceCombined3;;
+      } else {
+        this.total += +this.priceCombined3;;
+      }
     }    
     this.combined3();
   }
@@ -159,10 +165,16 @@ export class MainComponent implements OnInit {
     for(let lotery of this.loteriesSelected){
       for(let numbers of this.numbersAddedLst){ 
         if(numbers.type != 'Combinado'){       
-          this.total += +numbers.price;
+          if((numbers.number.length ==4 && lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE') || numbers.number.length == 3){
+            this.total += +numbers.price;
+          }
         }
       }
-      this.total += +this.priceCombined4 + +this.priceCombined3;;
+      if(lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE'){
+        this.total += +this.priceCombined4 + +this.priceCombined3;;
+      } else {
+        this.total += +this.priceCombined3;;
+      }
     }    
     this.combined4();
   }
@@ -171,10 +183,12 @@ export class MainComponent implements OnInit {
     this.total = 0;
     for(let lotery of this.loteriesSelected){
       for(let numbers of this.numbersAddedLst){
-        if(!numbers.price){
-          numbers.price = this.price;
-        }
-        this.total += +numbers.price;
+        if((numbers.number.length ==4 && lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE') || (numbers.number.length == 3 && numbers.type != 'Combinado')){
+          if(!numbers.price){
+            numbers.price = this.price;
+          }
+          this.total += +numbers.price;
+        }        
       }
     }
     this.price = undefined;
