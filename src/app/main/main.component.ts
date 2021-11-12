@@ -224,7 +224,7 @@ export class MainComponent implements OnInit {
 
   combined3(){    
     for(let numbers of this.numbersAddedLst){
-      if(numbers.type == 'Derecho'){
+      if(numbers.type == 'Derecho' && numbers.number.length == 3){
         const a = numbers.number[0];
         const b = numbers.number[1];
         const c = numbers.number[2];
