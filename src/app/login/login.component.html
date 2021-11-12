@@ -1,9 +1,13 @@
-<div>
-    <label class="title">usuario</label>
-    <input class="input" [(ngModel)]="user" maxlength="20"/>
+<div class="container">
+    <div class="container__content">
+        <div>
+            <div class="card">
+                <label fclass="input-label">Usuario</label>
+                <input class="form-control" maxlength="20" [(ngModel)]="user" >
+                <label fclass="input-label">Contraseña</label>
+                <input class="form-control" type="password" maxlength="20" [(ngModel)]="pwd" >
+                <div>
+                    <button class="bttn bttn-primary" type="button" (click)="login()">Entrar</button>
+                </div>
+            </div>
 </div>
-<div>
-    <label class="title">contrasena</label>
-    <input class="input" type="password" [(ngModel)]="pwd" maxlength="20"/>
-</div>
-<button type="button" (click)="login()">Entrar</button>
