@@ -29,7 +29,7 @@ export class LimitsComponent implements OnInit {
   find(){
     let limit;    
     limit = this.isThree ? 3 : this.isFour ? 4 : 0
-    this.server.getPassed(this.maxValue, this.date, limit).then((response) => {                  
+    this.server.getPassed(this.maxValue, this.date, limit, new Date()).then((response) => {                  
       this.passedList = response
     });
   }
@@ -39,7 +39,7 @@ export class LimitsComponent implements OnInit {
     for(const number of this.passedList){
       const valuePending: any = (+number.SUMA - +number.COVERED - +this.maxValue).toString();
       let game: Game = { loteryCode: number.lotery_code, number: number.NUMBER, value: valuePending, 
-        vendorCode: '', userName: 'ADMIN',  type: ''};
+        vendorCode: '', userName: 'ADMIN',  type: '', today: new Date()};
         if(valuePending > 0){
           data = data + number.NUMBER + " por " + number.NAME + " de " + valuePending + " \r\n";
           this.server.addCovered(game)

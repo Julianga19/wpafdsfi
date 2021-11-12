@@ -32,8 +32,8 @@ export class ServerService {
     return this.request('POST', `${environment.serverUrl}/limit`, data);  
   }
 
-  getPassed(number, date, limit){
-    return this.request('GET', `${environment.serverUrl}/limit/${number}/${date}/${limit}`);
+  getPassed(number, date, limit, today){
+    return this.request('GET', `${environment.serverUrl}/limit/${number}/${date}/${limit}/${today}`);
   }
 
   getWinners(number, date, loteryCode){

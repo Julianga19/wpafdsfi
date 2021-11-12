@@ -259,7 +259,7 @@ export class MainComponent implements OnInit {
             for(const number of this.numbersAddedLst){
               for(const lot of this.loteriesSelected){
                 let game: Game = { loteryCode: lot.code, number: number.number, value: number.price, 
-                  vendorCode: this.vendorCode, userName: 'ADMIN', type: number.type};
+                  vendorCode: this.vendorCode, userName: sessionStorage.getItem('user'), type: number.type, today: new Date()};
                 this.server.createEvent(game);
               }
             }
@@ -303,13 +303,13 @@ export class MainComponent implements OnInit {
       var m = date.getMonth() + 1; //Month from 0 to 11
       var y = date.getFullYear();
       var dateParam = y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);    
-      this.server.getPassed('5000', dateParam, 4).then((response : any) => {                  
+      this.server.getPassed('5000', dateParam, 4, new Date()).then((response : any) => {                  
         if (response.length > 0) {     
           if(this.verifyPending(response, '5000')){
             alert('Hay números por cubrir. Por favor verifique');
           }
         } else {
-          this.server.getPassed('20000', dateParam, 3).then((response: any) => {                  
+          this.server.getPassed('20000', dateParam, 3, new Date()).then((response: any) => {                  
             if (response.length > 0) {            
               if(this.verifyPending(response, '20000')){
                 alert('Hay números por cubrir. Por favor verifique');

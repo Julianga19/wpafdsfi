@@ -4,5 +4,6 @@ export interface Game {
     loteryCode: string;
     vendorCode: string;
     userName: string;
-    type: string;    
+    type: string;  
+    today: Date;  
 }

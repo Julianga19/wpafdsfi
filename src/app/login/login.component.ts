@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
       if(response){
         sessionStorage.setItem('isAdmin', response[0].isAdmin);
         sessionStorage.setItem('isLogged', 'true');
+        sessionStorage.setItem('user', this.user);
         this.router.navigate(['main']);
       }
     });
