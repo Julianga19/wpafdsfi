@@ -111,6 +111,7 @@ export class MainComponent implements OnInit {
     this.isAllLoteries = false;
     this.isLastThree = false;
     this.isCuna = false;
+    this.isCombined = false;
     
   }
 
