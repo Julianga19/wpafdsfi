@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  serverUrl: 'http://localhost:8080'
+  serverUrl: 'https://miasdfu23as.herokuapp.com/'
 };
