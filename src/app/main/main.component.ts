@@ -148,7 +148,7 @@ export class MainComponent implements OnInit {
     for(let lotery of this.loteriesSelected){
       for(let numbers of this.numbersAddedLst){        
         if(numbers.type != 'Combinado'){       
-          if((numbers.number.length ==4 && lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE') || numbers.number.length == 3){
+          if((numbers.number.length ==4 && lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE') || numbers.number.length == 3 || numbers.number.length == 2){
             this.total += +numbers.price;
           }
         }
@@ -167,7 +167,7 @@ export class MainComponent implements OnInit {
     for(let lotery of this.loteriesSelected){
       for(let numbers of this.numbersAddedLst){ 
         if(numbers.type != 'Combinado'){       
-          if((numbers.number.length ==4 && lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE') || numbers.number.length == 3){
+          if((numbers.number.length ==4 && lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE') || numbers.number.length == 3 || numbers.number.length == 2){
             this.total += +numbers.price;
           }
         }
@@ -224,15 +224,28 @@ export class MainComponent implements OnInit {
 
   combined3(){    
     for(let numbers of this.numbersAddedLst){
+      let a = '0';
+      let b = '0';
+      let c = '0';
       if(numbers.type == 'Derecho' && numbers.number.length == 3){
-        const a = numbers.number[0];
-        const b = numbers.number[1];
-        const c = numbers.number[2];
+        a = numbers.number[0];
+        b = numbers.number[1];
+        c = numbers.number[2];
         this.numbersAddedLst.push({number: a+c+b, price: this.priceCombined3, type: 'Combinado', isCombined3: true});                  
         this.numbersAddedLst.push({number: b+a+c, price: this.priceCombined3, type: 'Combinado', isCombined3: true});                  
         this.numbersAddedLst.push({number: b+c+a, price: this.priceCombined3, type: 'Combinado', isCombined3: true});                  
         this.numbersAddedLst.push({number: c+a+b, price: this.priceCombined3, type: 'Combinado', isCombined3: true});                  
-        this.numbersAddedLst.push({number: c+b+a, price: this.priceCombined3, type: 'Combinado', isCombined3: true});                  
+        this.numbersAddedLst.push({number: c+b+a, price: this.priceCombined3, type: 'Combinado', isCombined3: true});                        
+      }
+      if(numbers.type == 'Derecho' && numbers.number.length == 4){
+        a = numbers.number[1];
+        b = numbers.number[2];
+        c = numbers.number[3];
+        this.numbersAddedLst.push({number: a+c+b, price: this.priceCombined3, type: 'Combinado', isCombined3: true});                  
+        this.numbersAddedLst.push({number: b+a+c, price: this.priceCombined3, type: 'Combinado', isCombined3: true});                  
+        this.numbersAddedLst.push({number: b+c+a, price: this.priceCombined3, type: 'Combinado', isCombined3: true});                  
+        this.numbersAddedLst.push({number: c+a+b, price: this.priceCombined3, type: 'Combinado', isCombined3: true});                  
+        this.numbersAddedLst.push({number: c+b+a, price: this.priceCombined3, type: 'Combinado', isCombined3: true});                        
       }
     }
   }
