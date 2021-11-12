@@ -299,7 +299,7 @@ export class MainComponent implements OnInit {
   }
 
   unMarkLoteries(){
-    for (const loterie of this.loteriesSelected){
+    for (const loterie of this.loteries){
       loterie.checked = false;        
     }        
     this.loteriesSelected = [];
