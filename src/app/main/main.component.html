@@ -1,4 +1,5 @@
 <div class="container" *ngIf="isLogged">
+    <label class="input-label">Usuario: {{userLogged}}</label>        
     <div class="container__menu" *ngIf="isAdmin">
         <button class="bttn bttn-primary"  (click)="forbidden()">Prohibidos</button>
         <button class="bttn bttn-primary" (click)="winners()">Ganadores</button>

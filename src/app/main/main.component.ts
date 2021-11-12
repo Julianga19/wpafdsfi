@@ -35,13 +35,14 @@ export class MainComponent implements OnInit {
   isLogged;
   priceCombined3=0;
   priceCombined4=0;
-
+  userLogged;
   constructor(
     private server : ServerService,
     public router: Router,
   ) { }
 
   ngOnInit(): void {    
+    this.userLogged = sessionStorage.getItem('user');
     this.isAdmin = sessionStorage.getItem('isAdmin') == "0" ? false : true; 
     if(this.isAdmin){
       this.verify();
@@ -78,7 +79,7 @@ export class MainComponent implements OnInit {
   onEnter(){
     if(this.number.length > 2) {
       if(!this.isAForbiddenNumber(this.number)){      
-        this.numbersAddedLst.push({number: this.number, price: 0, type: 'Directo'});                  
+        this.numbersAddedLst.push({number: this.number, price: 0, type: 'Derecho'});                  
       } else {
         alert('Número Prohibido');
       }
@@ -206,7 +207,7 @@ export class MainComponent implements OnInit {
 
   combined3(){    
     for(let numbers of this.numbersAddedLst){
-      if(numbers.type == 'Directo'){
+      if(numbers.type == 'Derecho'){
         const a = numbers.number[0];
         const b = numbers.number[1];
         const c = numbers.number[2];
@@ -221,7 +222,7 @@ export class MainComponent implements OnInit {
 
   combined4(){    
     for(let numbers of this.numbersAddedLst){
-      if(numbers.type == 'Directo'){
+      if(numbers.type == 'Derecho'){
       const a = numbers.number[0];
       const b = numbers.number[1];
       const c = numbers.number[2];
