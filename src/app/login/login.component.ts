@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
     this.server.login(this.user, this.pwd).then((response) => {      
       if(response){
         sessionStorage.setItem('isAdmin', response[0].isAdmin);
+        sessionStorage.setItem('isLogged', 'true');
         this.router.navigate(['main']);
       }
     });

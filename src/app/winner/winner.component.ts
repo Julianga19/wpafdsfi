@@ -15,6 +15,7 @@ export class WinnerComponent implements OnInit {
   winnerList;
   loteries : Lotery[] = [];
   loteryCode;
+  isLogged;
 
   constructor(
     public router: Router,
@@ -22,6 +23,7 @@ export class WinnerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isLogged = sessionStorage.getItem('isLogged');
     this.server.getEvents().then((response: Lotery[]) => {
       for(const data of response) {        
           this.loteries.push(data);        

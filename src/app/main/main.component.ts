@@ -4,7 +4,7 @@ import { Lotery } from '../models/lotery.model';
 import { ServerService } from '../server.service';
 import { Game } from '../models/game.model';
 import { Router } from '@angular/router';
-
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -30,13 +30,20 @@ export class MainComponent implements OnInit {
   isAllLoteries;
   priceLt;
   priceCuna;
+  isAdmin; 
+  isLogged;
 
   constructor(
     private server : ServerService,
     public router: Router,
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
+    this.isAdmin = sessionStorage.getItem('isAdmin');
+    if(this.isAdmin){
+      this.verify();
+    }
+    this.isLogged = sessionStorage.getItem('isLogged');
     this.server.getVendors().then((response) => {      
       this.codes = response
     });
@@ -289,4 +296,37 @@ export class MainComponent implements OnInit {
     this.router.navigate(['limits']);
   }
 
+  verify(){
+    interval(300000).subscribe(x => {      
+      var date = new Date();
+      var d = date.getDate();
+      var m = date.getMonth() + 1; //Month from 0 to 11
+      var y = date.getFullYear();
+      var dateParam = y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);    
+      this.server.getPassed('5000', dateParam, 4).then((response : any) => {                  
+        if (response.length > 0) {     
+          if(this.verifyPending(response, '5000')){
+            alert('Hay números por cubrir. Por favor verifique');
+          }
+        } else {
+          this.server.getPassed('20000', dateParam, 3).then((response: any) => {                  
+            if (response.length > 0) {            
+              if(this.verifyPending(response, '20000')){
+                alert('Hay números por cubrir. Por favor verifique');
+              }
+            }
+          });
+        }
+      });      
+    });
+  }
+
+  verifyPending(result, maxValue){
+    for(const pending of result){
+      if(pending.SUMA-pending.COVERED-maxValue > 0){
+        return true;
+      }
+    }    
+    return false;
+  }
 }

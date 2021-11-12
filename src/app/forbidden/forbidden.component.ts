@@ -11,6 +11,7 @@ export class ForbiddenComponent implements OnInit {
 
   forbiddenLst;
   newNumber;
+  isLogged;
 
   constructor(
     public router: Router,
@@ -18,6 +19,7 @@ export class ForbiddenComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isLogged = sessionStorage.getItem('isLogged');
     this.server.getForbidden().then((response) => {
       this.forbiddenLst = response;    
     });

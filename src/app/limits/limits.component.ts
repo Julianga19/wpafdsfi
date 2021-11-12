@@ -16,13 +16,14 @@ export class LimitsComponent implements OnInit {
   passedList;
   isThree;
   isFour;
-
+  isLogged;
   constructor(
     public router: Router,
     private server : ServerService,
   ) { }
 
   ngOnInit(): void {
+    this.isLogged = sessionStorage.getItem('isLogged');
   }
 
   find(){
