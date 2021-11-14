@@ -17,6 +17,8 @@ export class LimitsComponent implements OnInit {
   isThree;
   isFour;
   isLogged;
+  isLoading;
+
   constructor(
     public router: Router,
     private server : ServerService,
@@ -27,19 +29,22 @@ export class LimitsComponent implements OnInit {
   }
 
   find(){
+    this.isLoading = true;
     this.passedList = [];
     let limit;    
     limit = this.isThree ? 3 : this.isFour ? 4 : 0
-    this.server.getPassed(this.maxValue, this.date, limit, new Date()).then((response: any) => {                  
+    this.server.getPassed(this.maxValue, this.date, limit, new Date()).then((response: any) => {                        
       for(const passed of response){
         if(passed.SUMA-passed.COVERED-this.maxValue > 0){        
           this.passedList.push(passed);
         }
       }
+      this.isLoading = false;
     });
   }
 
   cover(){
+    this.isLoading = true;
     let data = '';
     for(const number of this.passedList){
       const valuePending: any = (+number.SUMA - +number.COVERED - +this.maxValue).toString();
@@ -55,6 +60,8 @@ export class LimitsComponent implements OnInit {
                  data], 
                  {type: "text/plain;charset=utf-8"});
     saveAs(blob, "cubiertos.txt");
+    this.find();
+    this.isLoading = false;    
   }
 
   three(){

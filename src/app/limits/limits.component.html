@@ -23,7 +23,12 @@
                 </div>                
             </div>
             <div class="card">
-                <table class="table">
+                <div class="spinner" *ngIf="isLoading">
+                    <div class="bounce1"></div>
+                    <div class="bounce2"></div>
+                    <div class="bounce3"></div>
+                </div>
+                <table class="table" *ngIf="!isLoading">
                     <thead>
                     <tr>
                         <th scope="col">Número</th>        
@@ -44,3 +49,5 @@
                     </tbody>
                 </table>
             </div>
+            </div>
+            </div></div>            

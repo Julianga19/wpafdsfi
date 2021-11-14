@@ -37,6 +37,7 @@ export class MainComponent implements OnInit {
   priceCombined4=0;
   userLogged;
   isSuccess;
+  isLoading = false;
 
   constructor(
     private server : ServerService,
@@ -340,6 +341,7 @@ export class MainComponent implements OnInit {
   }
 
   save(){
+    this.isLoading = true;
     const user = sessionStorage.getItem('user');
     if(user){
       if(this.vendorCode){
@@ -370,6 +372,7 @@ export class MainComponent implements OnInit {
     }else {
       alert('Se perdió la sesion, por favor ingrese de nuevo');
     }
+    this.isLoading = false;
   }
 
   delete(number){

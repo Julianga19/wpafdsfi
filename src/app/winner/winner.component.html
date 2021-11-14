@@ -1,4 +1,4 @@
-<div class="container" *ngIf="isLogged">
+<div class="container" *ngIf="isLogged">    
     <div class="container__menu">
         <button class="bttn bttn-primary" (click)="main()">Principal</button>        
     </div>
@@ -16,10 +16,15 @@
                 <input type="date" class="form-control" [(ngModel)]="date">
                 <div class="full-width">
                     <button type="button" class="bttn bttn-primary" (click)="find()">Buscar</button>                    
-                </div>                
-            </div>
+                </div>                                
+            </div>              
             <div class="card">
-                <table class="table">
+                <div class="spinner" *ngIf="isLoading">
+                    <div class="bounce1"></div>
+                    <div class="bounce2"></div>
+                    <div class="bounce3"></div>
+                </div>
+                <table class="table" *ngIf="!isLoading">
                     <thead>
                     <tr>
                         <th scope="col">Número</th>        
@@ -46,4 +51,4 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div>        

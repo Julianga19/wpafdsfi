@@ -16,6 +16,7 @@ export class WinnerComponent implements OnInit {
   loteries : Lotery[] = [];
   loteryCode;
   isLogged;
+  isLoading;
 
   constructor(
     public router: Router,
@@ -32,8 +33,10 @@ export class WinnerComponent implements OnInit {
   }
 
   find(){  
+    this.isLoading = true;
     this.winnerList = [];  
     this.server.getWinners(this.numberWinner, this.date, this.loteryCode).then((response: any) => {      
+      this.isLoading = false;
       for(const data of response) {        
         if(data.number.length == 4){
           if(data.type == 'Derecho' || data.type == 'Directo' ){
