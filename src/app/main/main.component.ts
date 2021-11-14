@@ -125,7 +125,7 @@ export class MainComponent implements OnInit {
     for(let numbers of this.numbersAddedLst){
       if(this.loteriesSelected.length > 0){
         for(let lotery of this.loteriesSelected){      
-          if(numbers.isLt){
+          if(numbers.isLt && numbers.price == 0){
             numbers.price = this.priceLt;
           }
           this.total += +numbers.price;
@@ -146,7 +146,7 @@ export class MainComponent implements OnInit {
       if(this.loteriesSelected.length > 0 ){
         for(let lotery of this.loteriesSelected){      
           if(numbers.type != 'Combinado'){       
-            if(numbers.isCuna){
+            if(numbers.isCuna && numbers.price == 0){
               numbers.price = this.priceCuna;
             }        
             this.total += +numbers.price;
@@ -218,7 +218,9 @@ export class MainComponent implements OnInit {
       if(this.loteriesSelected.length > 0){
         for(let lotery of this.loteriesSelected){      
           if((numbers.number.length ==4 && lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE') || (numbers.number.length == 3 && numbers.type == 'Derecho')){            
-            numbers.price = this.price;            
+            if(!numbers.price){
+              numbers.price = this.price;            
+            }
             this.total += +numbers.price;
           }        
         }
