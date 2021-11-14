@@ -34,7 +34,7 @@
                     </div>                                      
                     <div class="label-checkbox" *ngIf="isLastThree">
                         <label >Valor</label>
-                        <input  class="form-control" (keyup.enter)="onEnterLTPrice()" [(ngModel)]="priceLt"/>
+                        <input  class="form-control" (keydown.enter)="onEnterLTPrice()" [(ngModel)]="priceLt"/>
                     </div>                  
                     <div class="label-checkbox">
                         <label class="label-checkbox">
@@ -44,7 +44,7 @@
                     </div>    
                     <div  class="label-checkbox" *ngIf="isCuna">
                         <label>Valor</label>
-                        <input class="form-control" (keyup.enter)="onEnterCunaPrice()"  [(ngModel)]="priceCuna"/>
+                        <input class="form-control" (keydown.enter)="onEnterCunaPrice()"  [(ngModel)]="priceCuna"/>
                     </div>                                              
                     <div class="label-checkbox">
                         <label class="label-checkbox">
@@ -54,9 +54,9 @@
                     </div>                                            
                     <div  class="label-checkbox" *ngIf="isCombined">
                         <label>Valor 3 </label>
-                        <input class="form-control" (keyup.enter)="onEnterCombined3Price()"  [(ngModel)]="priceCombined3"/>
+                        <input class="form-control" (keydown.enter)="onEnterCombined3Price()"  [(ngModel)]="priceCombined3"/>
                         <label>Valor 4 </label>
-                        <input class="form-control" (keyup.enter)="onEnterCombined4Price()"  [(ngModel)]="priceCombined4"/>
+                        <input class="form-control" (keydown.enter)="onEnterCombined4Price()"  [(ngModel)]="priceCombined4"/>
                     </div>                                              
                 </div>    
             <div class="success" *ngIf="isSuccess">GUARDADO EXITOSAMENTE</div>    
@@ -67,13 +67,13 @@
                             <div class="row">
                                 <div class="col-12">
                                     <label class="input-label">Número</label>
-                                    <input type="text" class="form-control" [(ngModel)]="number" (keyup.enter)="onEnter()" minlength="3" maxlength="4">
+                                    <input type="text" class="form-control" [(ngModel)]="number" (keydown.enter)="onEnter()" minlength="3" maxlength="4">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <label class="input-label">Valor</label>
-                                    <input type="text" class="form-control" (keyup.enter)="onEnterPrice()" [(ngModel)]="price">
+                                    <input type="text" class="form-control" (keydown.enter)="onEnterPrice()" [(ngModel)]="price">
                                 </div>
                             </div>
                             <div class="row">
