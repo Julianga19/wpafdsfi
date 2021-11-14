@@ -331,9 +331,11 @@ export class MainComponent implements OnInit {
   }
 
   unMarkLoteries(){    
-    for (const loterie of this.loteries){
-      loterie.checked = false;                           
-  }            
+    for (const loterie of this.loteries){      
+      loterie.checked = false;                          
+      const ele = document.getElementById(loterie.code) as HTMLInputElement;
+      ele.checked = false;
+    }                
     this.loteriesSelected = [];
   }
 
