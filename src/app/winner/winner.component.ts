@@ -41,6 +41,7 @@ export class WinnerComponent implements OnInit {
           } else {
             data.prize = data.value * 200;
           }
+        }
         if(data.number.length == 3){
           if(data.type == 'Derecho' || data.type == 'Directo' ){
             data.prize = data.value * 560;
@@ -52,8 +53,7 @@ export class WinnerComponent implements OnInit {
           data.prize = data.value * 50;
         }
         this.winnerList.push(data);
-      }
-    }
+      }    
     });
   }
 
