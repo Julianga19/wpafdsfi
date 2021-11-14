@@ -5,9 +5,10 @@ function createRouter(db) {
   const owner = '';
 
   router.post('/limit', (req, res, next) => {              
+    var date = new Date();    
     db.query(
       'INSERT INTO covered (NUMBER, VALUE, DATE, LOTERY_CODE) VALUES (?,?,?,?)',
-      [req.body.number, req.body.value, new Date(), req.body.loteryCode],
+      [req.body.number, req.body.value, new Date(date.toLocaleDateString() + ' ' + date.toLocaleTimeString() + ' GMT+0500'), req.body.loteryCode],
       (error) => {
         if (error) {
           console.error(error);
