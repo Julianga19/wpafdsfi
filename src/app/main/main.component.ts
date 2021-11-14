@@ -16,7 +16,7 @@ export class MainComponent implements OnInit {
 
   errorMsg;
   numbersAddedLst = [];
-  loteries : Lotery[] = [];
+  loteries : Lotery[] = [];  
   loteriesSelected : Lotery[] = [];
   options : Option [];
   number;
@@ -56,7 +56,7 @@ export class MainComponent implements OnInit {
     this.server.getEvents().then((response: Lotery[]) => {
       for(const data of response) {
         if(this.loteryApplyForDay(data.dayOfWeek, data.dayOfWeekException)){
-          this.loteries.push(data);
+          this.loteries.push(data);          
         }
       }    
     });
@@ -331,14 +331,9 @@ export class MainComponent implements OnInit {
   }
 
   unMarkLoteries(){    
-    this.server.getEvents().then((response: Lotery[]) => {
-      this.loteries = [];
-      for(const data of response) {        
-        if(this.loteryApplyForDay(data.dayOfWeek, data.dayOfWeekException)){
-          this.loteries.push(data);
-        }
-      }    
-    });    
+    for (const loterie of this.loteries){
+      loterie.checked = false;                           
+  }            
     this.loteriesSelected = [];
   }
 
