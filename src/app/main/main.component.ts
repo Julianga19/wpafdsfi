@@ -115,14 +115,23 @@ export class MainComponent implements OnInit {
     this.isLastThree = false;
     this.isCuna = false;
     this.isCombined = false;
+    this.priceCombined3 = 0;
+    this.priceCombined4=0;
     
   }
 
   onEnterLTPrice(){
     this.total=0;
-    for(let lotery of this.loteriesSelected){
-      for(let numbers of this.numbersAddedLst){
-        if(numbers.isLt && numbers.price == 0){
+    for(let numbers of this.numbersAddedLst){
+      if(this.loteriesSelected.length > 0){
+        for(let lotery of this.loteriesSelected){      
+          if(numbers.isLt){
+            numbers.price = this.priceLt;
+          }
+          this.total += +numbers.price;
+        }
+      }else {
+        if(numbers.isLt){
           numbers.price = this.priceLt;
         }
         this.total += +numbers.price;
@@ -133,14 +142,21 @@ export class MainComponent implements OnInit {
   
   onEnterCunaPrice(){
     this.total=0;
-    for(let lotery of this.loteriesSelected){
-      for(let numbers of this.numbersAddedLst){
-        if(numbers.type != 'Combinado'){       
-          if(numbers.isCuna && numbers.price == 0){
-            numbers.price = this.priceCuna;
-          }        
-          this.total += +numbers.price;
+    for(let numbers of this.numbersAddedLst){
+      if(this.loteriesSelected.length > 0 ){
+        for(let lotery of this.loteriesSelected){      
+          if(numbers.type != 'Combinado'){       
+            if(numbers.isCuna){
+              numbers.price = this.priceCuna;
+            }        
+            this.total += +numbers.price;
+          }
         }
+      } else {
+        if(numbers.isCuna){
+          numbers.price = this.priceCuna;
+        }        
+        this.total += +numbers.price;
       }
     }
     this.priceCuna = undefined;
@@ -148,52 +164,69 @@ export class MainComponent implements OnInit {
 
   onEnterCombined3Price(){
     this.total=0;
-    for(let lotery of this.loteriesSelected){
-      for(let numbers of this.numbersAddedLst){        
-        if(numbers.type != 'Combinado'){       
-          if((numbers.number.length ==4 && lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE') || numbers.number.length == 3 || numbers.number.length == 2){
-            this.total += +numbers.price;
+    for(let numbers of this.numbersAddedLst){        
+      if(this.loteriesSelected.length> 0){
+        for(let lotery of this.loteriesSelected){      
+          if(numbers.type != 'Combinado'){       
+            if((numbers.number.length ==4 && lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE') || numbers.number.length == 3 || numbers.number.length == 2){
+              this.total += +numbers.price;
+            }
+          }
+          if(lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE'){
+            this.total += +this.priceCombined4 + +this.priceCombined3;;
+          } else {
+            this.total += +this.priceCombined3;;          
           }
         }
-      }
-      if(lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE'){
-        this.total += +this.priceCombined4 + +this.priceCombined3;;
       } else {
-        this.total += +this.priceCombined3;;
-      }
-    }    
+        if(numbers.type != 'Combinado')
+          this.total = this.total + +numbers.price;      
+      }      
+    }  
+    this.total += +this.priceCombined4 + +this.priceCombined3;
     this.combined3();
   }
 
   onEnterCombined4Price(){
-    this.total=0;
-    for(let lotery of this.loteriesSelected){
+    this.total=0;    
       for(let numbers of this.numbersAddedLst){ 
-        if(numbers.type != 'Combinado'){       
-          if((numbers.number.length ==4 && lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE') || numbers.number.length == 3 || numbers.number.length == 2){
-            this.total += +numbers.price;
+        if(this.loteriesSelected.length>0){
+          for(let lotery of this.loteriesSelected){
+            if(numbers.type != 'Combinado'){       
+              if((numbers.number.length ==4 && lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE') || numbers.number.length == 3 || numbers.number.length == 2){
+                this.total += +numbers.price;
+              }
+            }
+            if(lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE'){
+              this.total += +this.priceCombined4 + +this.priceCombined3;;
+            } else {
+              this.total += +this.priceCombined3;;    
+            }
           }
-        }
-      }
-      if(lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE'){
-        this.total += +this.priceCombined4 + +this.priceCombined3;;
-      } else {
-        this.total += +this.priceCombined3;;
-      }
+        } else {
+          if(numbers.type != 'Combinado')
+            this.total =  this.total + +numbers.price;                
+        }               
     }    
+    this.total += +this.priceCombined4 + +this.priceCombined3;
     this.combined4();
   }
 
   onEnterPrice(){
     this.total = 0;
-    for(let lotery of this.loteriesSelected){
-      for(let numbers of this.numbersAddedLst){
-        if((numbers.number.length ==4 && lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE') || (numbers.number.length == 3 && numbers.type != 'Combinado')){
-          if(!numbers.price){
-            numbers.price = this.price;
-          }
-          this.total += +numbers.price;
-        }        
+    for(let numbers of this.numbersAddedLst){
+      if(this.loteriesSelected.length > 0){
+        for(let lotery of this.loteriesSelected){      
+          if((numbers.number.length ==4 && lotery.code != 'CASHTHREEDIA' && lotery.code != 'CASHTHREENOCHE') || (numbers.number.length == 3 && numbers.type == 'Derecho')){            
+            numbers.price = this.price;            
+            this.total += +numbers.price;
+          }        
+        }
+       } else {
+        if(numbers.type == 'Derecho'){            
+          numbers.price = this.price;            
+          this.total += +this.price;
+        }
       }
     }
     this.price = undefined;
@@ -312,10 +345,29 @@ export class MainComponent implements OnInit {
   selected(loterie){
     const index = this.loteriesSelected.indexOf(loterie);
     if (index === -1) {
-      this.loteriesSelected.push(loterie);
+      this.loteriesSelected.push(loterie);      
     } else {
       this.loteriesSelected.splice(index, 1);
     }    
+    this.sumValues();
+  }
+
+  sumValues(){
+    this.total = 0;
+    for(const lot of this.loteriesSelected){
+      for(const number of this.numbersAddedLst){      
+        if(number.type != 'Combinado'){
+          if((number.number.length ==4 && lot.code != 'CASHTHREEDIA' && lot.code != 'CASHTHREENOCHE') || number.number.length == 3 || number.number.length == 2){
+            this.total = this.total + +number.price;
+          }
+        }                 
+      }
+      if(lot.code != 'CASHTHREEDIA' && lot.code != 'CASHTHREENOCHE'){
+        this.total += +this.priceCombined4 + +this.priceCombined3;;
+      } else {
+        this.total += +this.priceCombined3;;
+      }        
+    }
   }
 
   all(){
