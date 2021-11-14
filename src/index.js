@@ -12,11 +12,16 @@ const users = require('./users');
 
 
 const connection = mysql.createConnection({
-  host     : 'remotemysql.com',
+  //host     : 'remotemysql.com',
+  //port     : '3306',
+  //user     : 'YflbgGGuYI',
+  //password : 'PRVwXgemLr',
+  //database : 'YflbgGGuYI'
+  host     : 'localhost',
   port     : '3306',
-  user     : 'YflbgGGuYI',
-  password : 'PRVwXgemLr',
-  database : 'YflbgGGuYI'
+  user     : 'root',
+  password : 'y4545g$Md',
+  database : 'bet'
 });
 
 connection.connect();

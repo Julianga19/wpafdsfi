@@ -6,7 +6,7 @@
         <button class="bttn bttn-primary" (click)="limits()">Cubrir</button>        
     </div>
     <div class="container__content">
-        <div>
+        <div>            
             <div class="card">
                 <label for="exampleDataList" class="input-label">Código</label>
                 <input class="form-control" list="codeOptions" id="exampleDataList" [(ngModel)]="vendorCode" >
@@ -58,7 +58,8 @@
                         <label>Valor 4 </label>
                         <input class="form-control" (keyup.enter)="onEnterCombined4Price()"  [(ngModel)]="priceCombined4"/>
                     </div>                                              
-                </div>        
+                </div>    
+            <div class="success" *ngIf="isSuccess">GUARDADO EXITOSAMENTE</div>    
             <div class="card">
                 <div class="form-container">
                     <div class="form">
@@ -86,7 +87,7 @@
                                 <button type="button" class="bttn bttn-primary full-width" (click)="clearAllData()">Limpiar</button>                            
                             </div>
                         </div>                
-                    </div>
+                    </div>                    
                     <div class="table-container">
                         <table class="table table-hover">
                             <thead>

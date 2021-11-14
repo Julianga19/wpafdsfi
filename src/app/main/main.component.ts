@@ -36,6 +36,8 @@ export class MainComponent implements OnInit {
   priceCombined3=0;
   priceCombined4=0;
   userLogged;
+  isSuccess;
+
   constructor(
     private server : ServerService,
     public router: Router,
@@ -354,6 +356,7 @@ export class MainComponent implements OnInit {
                   this.server.createEvent(game);
                 }
               }
+              this.success();
               this.clearAllData();
             } else {
               alert('El total apostado debe ser mayor a 0');    
@@ -390,6 +393,10 @@ export class MainComponent implements OnInit {
     this.router.navigate(['limits']);
   }
 
+  success(){
+    this.isSuccess = true;
+    setTimeout(() => this.isSuccess = false, 3000);
+  }
   verify(){
     interval(300000).subscribe(x => {      
       var date = new Date();
