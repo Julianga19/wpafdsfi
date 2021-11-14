@@ -13,7 +13,7 @@ export class LimitsComponent implements OnInit {
 
   maxValue;
   date;
-  passedList;
+  passedList =[];
   isThree;
   isFour;
   isLogged;
@@ -27,10 +27,15 @@ export class LimitsComponent implements OnInit {
   }
 
   find(){
+    this.passedList = [];
     let limit;    
     limit = this.isThree ? 3 : this.isFour ? 4 : 0
-    this.server.getPassed(this.maxValue, this.date, limit, new Date()).then((response) => {                  
-      this.passedList = response
+    this.server.getPassed(this.maxValue, this.date, limit, new Date()).then((response: any) => {                  
+      for(const passed of response){
+        if(passed.SUMA-passed.COVERED-this.maxValue > 0){        
+          this.passedList.push(passed);
+        }
+      }
     });
   }
 
