@@ -484,4 +484,8 @@ export class MainComponent implements OnInit {
     }    
     return false;
   }
+
+  graphics(){
+    this.router.navigate(['graphics']);
+  }
 }

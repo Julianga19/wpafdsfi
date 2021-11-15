@@ -1,0 +1,23 @@
+<div class="container" *ngIf="isLogged">
+    <div class="container__menu">
+        <button class="bttn bttn-primary" (click)="main()">Principal</button>        
+    </div>
+    <div class="container__content">
+        <div>
+            <div class="card">
+                <label>Ingresados hoy por usuario</label>
+                <div>
+                    <div style="display: block">
+                    <canvas baseChart
+                            [datasets]="barChartData"
+                            [labels]="barChartLabels"
+                            [options]="barChartOptions"
+                            [legend]="barChartLegend"
+                            [chartType]="barChartType">
+                    </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

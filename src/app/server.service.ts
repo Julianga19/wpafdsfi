@@ -71,4 +71,8 @@ export class ServerService {
   deleteEvent(event) {
     return this.request('DELETE', `${environment.serverUrl}/event/${event.id}`);
   }
+
+  graphicsByUser(){
+    return this.request('GET', `${environment.serverUrl}/graphicsByUser`);   
+  }
 }

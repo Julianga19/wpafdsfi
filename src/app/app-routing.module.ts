@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ChartTypedByUserComponent } from './chart-typed-by-user/chart-typed-by-user.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { LimitsComponent } from './limits/limits.component';
 import { LoginComponent } from './login/login.component';
@@ -27,6 +28,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
+  {
+    path: 'graphics',
+    component: ChartTypedByUserComponent
+  }, 
   {
     path: '', redirectTo: 'login', pathMatch: 'full'
   },

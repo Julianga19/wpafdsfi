@@ -11,7 +11,8 @@ import { WinnerComponent } from './winner/winner.component';
 import { LimitsComponent } from './limits/limits.component';
 import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { ChartTypedByUserComponent } from './chart-typed-by-user/chart-typed-by-user.component';
+import { ChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,14 +20,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ForbiddenComponent,
     WinnerComponent,
     LimitsComponent,
-    LoginComponent  
+    LoginComponent  ,
+    ChartTypedByUserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
