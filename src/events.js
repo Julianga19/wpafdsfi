@@ -23,7 +23,7 @@ function createRouter(db) {
 
   router.get('/event', function (req, res, next) {
     db.query(
-      'SELECT code, name, dayOfWeek, dayOfWeekException FROM lotery',
+      'SELECT code, name, dayOfWeek, dayOfWeekException, hourClose, minuteClose FROM lotery',
       [owner, 10*(req.params.page || 0)],
       (error, results) => {
         if (error) {

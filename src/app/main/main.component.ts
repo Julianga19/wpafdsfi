@@ -57,7 +57,10 @@ export class MainComponent implements OnInit {
     this.server.getEvents().then((response: Lotery[]) => {
       for(const data of response) {
         if(this.loteryApplyForDay(data.dayOfWeek, data.dayOfWeekException)){
-          this.loteries.push(data);          
+          const currentTime = new Date();          
+          if(currentTime.getHours() < data.hourClose){
+            this.loteries.push(data);          
+          }        
         }
       }    
     });

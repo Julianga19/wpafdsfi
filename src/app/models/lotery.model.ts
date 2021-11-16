@@ -5,4 +5,6 @@ export interface Lotery {
     dayOfWeekException: number;
     checked;
     prize;
+    hourClose?: number;
+    minuteClose?: number;
 }
