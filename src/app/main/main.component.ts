@@ -48,7 +48,7 @@ export class MainComponent implements OnInit {
     this.userLogged = sessionStorage.getItem('user');
     this.isAdmin = sessionStorage.getItem('isAdmin') == "0" ? false : true; 
     if(this.isAdmin){
-      this.verify();
+      // this.verify();
     }
     this.isLogged = sessionStorage.getItem('isLogged');
     this.server.getVendors().then((response) => {      
