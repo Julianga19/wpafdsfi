@@ -461,13 +461,13 @@ export class MainComponent implements OnInit {
       var m = date.getMonth() + 1; //Month from 0 to 11
       var y = date.getFullYear();
       var dateParam = y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);    
-      this.server.getPassed('5000', dateParam, 4, new Date()).then((response : any) => {                  
+      this.server.getPassed('5000', dateParam, 4, new Date(), this.loteries).then((response : any) => {                  
         if (response.length > 0) {     
           if(this.verifyPending(response, '5000')){
             alert('Hay números por cubrir. Por favor verifique');
           }
         } else {
-          this.server.getPassed('20000', dateParam, 3, new Date()).then((response: any) => {                  
+          this.server.getPassed('20000', dateParam, 3, new Date(), this.loteries).then((response: any) => {                  
             if (response.length > 0) {            
               if(this.verifyPending(response, '20000')){
                 alert('Hay números por cubrir. Por favor verifique');

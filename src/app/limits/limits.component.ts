@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Game } from '../models/game.model';
 import { ServerService } from '../server.service';
 import { saveAs } from 'file-saver';
+import { Lotery } from '../models/lotery.model';
 
 @Component({
   selector: 'app-limits',
@@ -18,6 +19,8 @@ export class LimitsComponent implements OnInit {
   isFour;
   isLogged;
   isLoading;
+  loteries : Lotery[] = [];  
+  loteriesStr: String = '';
 
   constructor(
     public router: Router,
@@ -31,16 +34,27 @@ export class LimitsComponent implements OnInit {
   find(){
     this.isLoading = true;
     this.passedList = [];
+    this.loteriesStr = '';
     let limit;    
-    limit = this.isThree ? 3 : this.isFour ? 4 : 0
-    this.server.getPassed(this.maxValue, this.date, limit, new Date()).then((response: any) => {                        
-      for(const passed of response){
-        if(passed.SUMA-passed.COVERED-this.maxValue > 0){        
-          this.passedList.push(passed);
+    limit = this.isThree ? 3 : this.isFour ? 4 : 0;
+    this.server.getEvents().then((response: Lotery[]) => {
+      for(const data of response) {
+        if(this.loteryApplyForDay(data.dayOfWeek, data.dayOfWeekException)){
+          const currentTime = new Date();          
+          if(currentTime.getHours() < data.hourClose){
+            this.loteriesStr = this.loteriesStr + "'" + data.code + "',";
+          }        
         }
-      }
-      this.isLoading = false;
-    });
+      }          
+      this.server.getPassed(this.maxValue, this.date, limit, new Date(), this.loteriesStr.substr(0,this.loteriesStr.length-1)).then((response: any) => {                        
+        for(const passed of response){
+          if(passed.SUMA-passed.COVERED-this.maxValue > 0){        
+            this.passedList.push(passed);
+          }
+        }
+        this.isLoading = false;
+      });
+    });    
   }
 
   cover(){
@@ -74,6 +88,19 @@ export class LimitsComponent implements OnInit {
 
   main(){
     this.router.navigate(['main']);
+  }
+
+  loteryApplyForDay(dayApply, dayException): any {
+    const day = new Date().getDay();
+    if (day == dayApply) {
+      return true;
+    } else if (-1 == dayApply && dayException == undefined) {
+      return true;
+    } else if (-1 == dayApply && dayException != day) {
+      return true;
+    } else if (-2 == dayApply && (day == 6 || day == 0)) {
+      return true;
+    } else return false;
   }
 }
 
