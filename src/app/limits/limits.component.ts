@@ -47,6 +47,7 @@ export class LimitsComponent implements OnInit {
         }
       }          
       this.server.getPassed(this.maxValue, this.date, limit, new Date(), this.loteriesStr.substr(0,this.loteriesStr.length-1)).then((response: any) => {                        
+        console.log(response);
         for(const passed of response){
           if(passed.SUMA-passed.COVERED-this.maxValue > 0){        
             this.passedList.push(passed);
