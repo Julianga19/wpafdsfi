@@ -46,8 +46,13 @@ export class LimitsComponent implements OnInit {
           }        
         }
       }          
-      this.server.getPassed(this.maxValue, this.date, limit, new Date(), this.loteriesStr.substr(0,this.loteriesStr.length-1)).then((response: any) => {                        
-        console.log(response);
+      let today = new Date().toLocaleDateString();
+      var date = new Date(today);    
+      var d = date.getDate();
+      var m = date.getMonth() + 1; //Month from 0 to 11
+      var y = date.getFullYear();
+      var dateParam = y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);            
+      this.server.getPassed(this.maxValue, this.date, limit, dateParam, this.loteriesStr.substr(0,this.loteriesStr.length-1)).then((response: any) => {                                
         for(const passed of response){
           if(passed.SUMA-passed.COVERED-this.maxValue > 0){        
             this.passedList.push(passed);
