@@ -22,7 +22,7 @@ function createRouter(db) {
 
 
   router.get('/limit/:value/:date/:limit/:today/:loteries', function (req, res, next) {                   
-    var datei = new Date().toLocaleDateString();
+    var datei = req.params.today;
     var date = new Date(datei);    
     var d = date.getDate();
     var m = date.getMonth() + 1; //Month from 0 to 11
