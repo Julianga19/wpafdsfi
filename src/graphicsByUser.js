@@ -7,7 +7,8 @@ function createRouter(db) {
   // the routes are defined here
   
   router.get('/graphicsByUser', function (req, res, next) {
-    var datei = new Date().toLocaleDateString();
+    let datei = new Date().toLocaleDateString('en-US', {
+      month: '2-digit',day: '2-digit',year: 'numeric'})      
     var date = new Date(datei);    
     var d = date.getDate();
     var m = date.getMonth() + 1; //Month from 0 to 11
