@@ -47,6 +47,7 @@ export class LimitsComponent implements OnInit {
         }
       }          
       let today = new Date().toLocaleDateString();
+      console.log(today);
       var date = new Date(today);    
       var d = date.getDate();
       var m = date.getMonth() + 1; //Month from 0 to 11
