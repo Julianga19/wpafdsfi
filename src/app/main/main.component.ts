@@ -60,6 +60,10 @@ export class MainComponent implements OnInit {
           const currentTime = new Date();          
           if(currentTime.getHours() < data.hourClose){
             this.loteries.push(data);          
+          } else if (currentTime.getHours() == data.hourClose){
+            if(currentTime.getMinutes() < data.minuteClose){
+              this.loteries.push(data);          
+            }   
           }        
         }
       }    
@@ -490,5 +494,10 @@ export class MainComponent implements OnInit {
 
   graphics(){
     this.router.navigate(['graphics']);
+  }
+
+  logout(){
+    sessionStorage.clear();
+    this.router.navigate(['login']);  
   }
 }
