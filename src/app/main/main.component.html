@@ -1,12 +1,13 @@
 <div class="container" *ngIf="isLogged">
     <label class="input-label">Usuario: {{userLogged}}</label>        
-    <div class="container__menu" *ngIf="isAdmin">
-        <button class="bttn bttn-primary"  (click)="forbidden()">Prohibidos</button>
-        <button class="bttn bttn-primary" (click)="winners()">Ganadores</button>
-        <button class="bttn bttn-primary" (click)="limits()">Cubrir</button>        
-        <button class="bttn bttn-primary" (click)="graphics()">Graficos</button>   
+    <div class="container__menu">
+        <button class="bttn bttn-primary"  (click)="forbidden()" *ngIf="isAdmin">Prohibidos</button>
+        <button class="bttn bttn-primary" (click)="winners()" *ngIf="isAdmin">Ganadores</button>
+        <button class="bttn bttn-primary" (click)="limits()" *ngIf="isAdmin">Cubrir</button>        
+        <button class="bttn bttn-primary" (click)="graphics()" *ngIf="isAdmin">Graficos</button>   
         <button class="bttn bttn-primary" (click)="logout()">Salir</button> 
-        <label class="input-label">Versión: 1.109</label>              
+        <label class="input-label">Versión: 1.109_1</label>              
+        <!-- Version.MonthDay_versionofDay-->
     </div>
     <div class="container__content">
         <div>            
