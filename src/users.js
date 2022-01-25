@@ -7,7 +7,7 @@ function createRouter(db) {
   // the routes are defined here
   router.get('/users/:user/:pass', function (req, res, next) {    
     db.query(
-      'SELECT isAdmin, isSupervisor FROM users WHERE username =? and password = ?',
+      'SELECT isAdmin, isSupervisor FROM users WHERE username =? and password = ? and isDeleted != 1',
       [req.params.user, req.params.pass],
       (error, results) => {
         if (error) {
