@@ -1,0 +1,32 @@
+<div class="container" *ngIf="isLogged">
+    <div class="container__menu">
+        <button class="bttn bttn-primary" (click)="main()">Principal</button>        
+    </div>
+    <div class="container__content">
+        <div>
+            <div class="card">
+                <label class="input-label">Código</label>
+                <input class="form-control" [(ngModel)]="newVendor"/>
+                <div class="full-width">
+                    <button type="button" class="bttn bttn-primary" (click)="save()">Agregar</button>                    
+                </div>          
+            </div>
+            <div class="card">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Código</th>        
+                        <th scope="col">Eliminar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let value of this.vendorLst">
+                        <td>{{value.code}}</td>        
+                        <td><button type="button" class="btn btn-danger" (click)="delete(value)">Eliminar</button></td>                                                    
+                    </tr>      
+                    </tbody>
+                </table>                
+            </div>
+        </div>
+    </div>
+</div>

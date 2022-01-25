@@ -36,6 +36,20 @@ function createRouter(db) {
     );
   });
 
+  router.put('/event/:code/:dayOfWeek', function (req, res, next) {
+    db.query(
+      'UPDATE lotery set dayOfWeek=? WHERE code=?',
+      [req.params.dayOfWeek, req.params.code],
+      (error) => {
+        if (error) {
+          res.status(500).json({status: 'error'});
+        } else {
+          res.status(200).json({status: 'ok'});
+        }
+      }
+    );
+  });
+
   return router;
 }
 

@@ -13,6 +13,9 @@ import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartTypedByUserComponent } from './chart-typed-by-user/chart-typed-by-user.component';
 import { ChartsModule } from 'ng2-charts';
+import { UsersComponent } from './users/users.component';
+import { VendorsComponent } from './vendors/vendors.component';
+import { LoteriesComponent } from './loteries/loteries.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +24,10 @@ import { ChartsModule } from 'ng2-charts';
     WinnerComponent,
     LimitsComponent,
     LoginComponent  ,
-    ChartTypedByUserComponent
+    ChartTypedByUserComponent,
+    UsersComponent,
+    VendorsComponent,
+    LoteriesComponent
   ],
   imports: [
     BrowserModule,

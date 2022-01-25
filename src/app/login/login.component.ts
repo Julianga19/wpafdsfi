@@ -22,9 +22,9 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.server.login(this.user, this.pwd).then((response) => {      
-      if(response){
-        console.log(response[0].isAdmin);
+      if(response){        
         sessionStorage.setItem('isAdmin', response[0].isAdmin);
+        sessionStorage.setItem('isSupervisor', response[0].isSupervisor);
         sessionStorage.setItem('isLogged', 'true');
         sessionStorage.setItem('user', this.user);
         this.router.navigate(['main']);

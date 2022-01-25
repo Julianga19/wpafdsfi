@@ -1,0 +1,48 @@
+<div class="container" *ngIf="isLogged">
+    <div class="container__menu">
+        <button class="bttn bttn-primary" (click)="main()">Principal</button>        
+    </div>
+    <div class="container__content">
+        <div>
+            <div class="card">
+                <label class="input-label">Usuario</label>
+                <input class="form-control" [(ngModel)]="newUser"/>
+                <label class="input-label">Contraseña</label>
+                <input class="form-control" [(ngModel)]="newPassword"/>
+                <div style="display:block">
+                    <label class="input-label">Es Administrador</label>
+                    <input class="chkbox" type="checkbox" [(ngModel)]="newIsAdmin"/>
+                    <label class="input-label">Es Supervisor</label>
+                    <input class="chkbox" type="checkbox" [(ngModel)]="newIsSupervisor"/>
+                </div>
+                <div class="full-width">
+                    <button type="button" class="bttn bttn-primary" (click)="save()">Agregar</button>                    
+                </div>          
+            </div>
+            <div class="card">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Contraseña</th>
+                        <th scope="col">Administrador</th>
+                        <th scope="col">Supervisor</th>
+                        <th scope="col">Eliminar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let value of this.userLst">
+                        <td>{{value.username}}</td>        
+                        <td>{{value.password}}</td> 
+                        <td *ngIf="value.isadmin == 1">Sí</td> 
+                        <td *ngIf="value.isadmin != 1">No</td> 
+                        <td *ngIf="value.isSupervisor == 1">Sí</td> 
+                        <td *ngIf="value.isSupervisor != 1">No</td>                         
+                        <td><button type="button" class="btn btn-danger" (click)="delete(value)">Eliminar</button></td>                                                    
+                    </tr>      
+                    </tbody>
+                </table>                
+            </div>
+        </div>
+    </div>
+</div>

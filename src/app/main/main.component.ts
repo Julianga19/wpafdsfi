@@ -32,6 +32,7 @@ export class MainComponent implements OnInit {
   priceLt;
   priceCuna;
   isAdmin; 
+  isSupervisor;
   isLogged;
   priceCombined3=0;
   priceCombined4=0;
@@ -47,6 +48,7 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {    
     this.userLogged = sessionStorage.getItem('user');
     this.isAdmin = sessionStorage.getItem('isAdmin') == "0" ? false : true; 
+    this.isSupervisor = sessionStorage.getItem('isSupervisor') == "0" ? false : true; 
     if(this.isAdmin){
       // this.verify();
     }
@@ -494,6 +496,18 @@ export class MainComponent implements OnInit {
 
   graphics(){
     this.router.navigate(['graphics']);
+  }
+
+  users(){
+    this.router.navigate(['users']);
+  }
+
+  vendors(){
+    this.router.navigate(['vendors']);
+  }
+
+  loteriesBtn(){
+    this.router.navigate(['loteries']);
   }
 
   logout(){

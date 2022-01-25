@@ -28,6 +28,18 @@ export class ServerService {
     return this.request('GET', `${environment.serverUrl}/users/${user}/${pass}`);
   }
 
+  getUsers(){
+    return this.request('GET', `${environment.serverUrl}/usersAll`);
+  }
+
+  addUser(username, pwd, isAdmin, isSupervisor){
+    return this.request('POST', `${environment.serverUrl}/users`,{username: username, password: pwd, isAdmin: isAdmin, isSupervisor: isSupervisor});  
+  }
+
+  deleteUser(username) {
+    return this.request('PUT', `${environment.serverUrl}/users/${username}`);    
+  }
+
   addCovered(data){    
     return this.request('POST', `${environment.serverUrl}/limit`, data);  
   }
@@ -56,6 +68,15 @@ export class ServerService {
     return this.request('GET', `${environment.serverUrl}/vendors`);
   }
 
+  addVendor(code){
+    return this.request('POST', `${environment.serverUrl}/vendors`,{code: code});  
+  }
+
+  deleteVendor(code) {
+    return this.request('PUT', `${environment.serverUrl}/vendors/${code}`);    
+  }
+
+
   getEvents() {
     return this.request('GET', `${environment.serverUrl}/event`);
   }
@@ -64,8 +85,8 @@ export class ServerService {
     return this.request('POST', `${environment.serverUrl}/event`, event);
   }
 
-  updateEvent(event) {
-    return this.request('PUT', `${environment.serverUrl}/event/${event.id}`, event);
+  changeLoteryDay(code, dayOfWeek) {
+    return this.request('PUT', `${environment.serverUrl}/event/${code}/${dayOfWeek}`);
   }
 
   deleteEvent(event) {
