@@ -1,6 +1,7 @@
 <div class="container" *ngIf="isLogged">
     <label class="input-label">Usuario: {{userLogged}}</label>        
     <div class="container__menu">
+        <label class="input-label">Versión: 2.125_1</label>              
         <button class="bttn bttn-primary"  (click)="forbidden()" *ngIf="isAdmin">Prohibidos</button>
         <button class="bttn bttn-primary" (click)="winners()" *ngIf="isAdmin">Ganadores</button>
         <button class="bttn bttn-primary" (click)="limits()" *ngIf="isAdmin">Cubrir</button>        
@@ -9,7 +10,12 @@
         <button class="bttn bttn-primary" (click)="vendors()" *ngIf="isAdmin">Vendedores</button>   
         <button class="bttn bttn-primary" (click)="loteriesBtn()" *ngIf="isAdmin">Loterias</button>   
         <button class="bttn bttn-primary" (click)="logout()">Salir</button> 
-        <label class="input-label">Versión: 2.125_1</label>              
+        <div>
+            <label for="exampleDataList" class="input-label">Últimos ingresados</label>
+            <table>
+            <tr *ngFor="let game of lastest">{{game.number}}</tr>
+            </table>
+        </div>        
         <!-- Version.MonthDay_versionofDay-->
     </div>
     <div class="container__content">

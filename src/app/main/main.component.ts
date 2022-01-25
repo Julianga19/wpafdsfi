@@ -19,6 +19,7 @@ export class MainComponent implements OnInit {
   loteries : Lotery[] = [];  
   loteriesSelected : Lotery[] = [];
   options : Option [];
+  lastest: Game[] = [];
   number;
   price;
   vendorCode;
@@ -415,8 +416,9 @@ export class MainComponent implements OnInit {
                 for(const lot of this.loteriesSelected){
                   let game: Game = { loteryCode: lot.code, number: number.number, value: number.price, 
                     vendorCode: this.vendorCode, userName: user, type: number.type, today: new Date()};
-                  this.server.createEvent(game);
+                  this.server.createEvent(game);                  
                 }
+                this.enqueueGame(number);
               }
               this.success();
               this.clearAllData();
@@ -513,5 +515,14 @@ export class MainComponent implements OnInit {
   logout(){
     sessionStorage.clear();
     this.router.navigate(['login']);  
+  }
+
+  enqueueGame(number){
+    if(this.lastest.length > 10){
+      this.lastest.pop();
+      this.lastest.unshift(number);
+    } else {
+      this.lastest.unshift(number);
+    }   
   }
 }
