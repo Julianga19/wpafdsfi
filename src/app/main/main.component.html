@@ -1,7 +1,7 @@
 <div class="container" *ngIf="isLogged">
     <label class="input-label">Usuario: {{userLogged}}</label>        
     <div class="container__menu">
-        <label class="input-label">Versión: 2.125_1</label>              
+        <label class="input-label">Versión: 2.131_1</label>              
         <button class="bttn bttn-primary"  (click)="forbidden()" *ngIf="isAdmin">Prohibidos</button>
         <button class="bttn bttn-primary" (click)="winners()" *ngIf="isAdmin">Ganadores</button>
         <button class="bttn bttn-primary" (click)="limits()" *ngIf="isAdmin">Cubrir</button>        
@@ -39,6 +39,16 @@
                 </label>                                                  
             
                 <label class="input-label">Opciones</label>                                    
+                    <div class="label-checkbox">
+                        <label class="label-checkbox">
+                            <input class="chkbox" type="checkbox" [checked]="this.isFirstThree" (click)="firstThree()" value="" id="flexCheckDefault">                        
+                            Tres primeras                      
+                        </label>                                    
+                    </div>                                      
+                    <div class="label-checkbox" *ngIf="isFirstThree">
+                        <label >Valor</label>
+                        <input  class="form-control" (keydown.enter)="onEnterFTPrice()" [(ngModel)]="priceFt"/>
+                    </div>                  
                     <div class="label-checkbox">
                         <label class="label-checkbox">
                             <input class="chkbox" type="checkbox" [checked]="this.isLastThree" (click)="lastThree()" value="" id="flexCheckDefault">                        

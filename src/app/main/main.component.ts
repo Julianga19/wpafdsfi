@@ -24,6 +24,7 @@ export class MainComponent implements OnInit {
   price;
   vendorCode;
   isLastThree;
+  isFirstThree;
   isCuna;
   isCombined;
   forbiddenNumbers;
@@ -31,6 +32,7 @@ export class MainComponent implements OnInit {
   codes;
   isAllLoteries;
   priceLt;
+  priceFt;
   priceCuna;
   isAdmin; 
   isSupervisor;
@@ -123,6 +125,7 @@ export class MainComponent implements OnInit {
     this.numbersAddedLst = [];     
     this.isAllLoteries = false;
     this.isLastThree = false;
+    this.isFirstThree = false;
     this.isCuna = false;
     this.isCombined = false;
     this.priceCombined3 = 0;
@@ -148,6 +151,26 @@ export class MainComponent implements OnInit {
       }
     }
     this.priceLt = undefined;
+  }
+
+  onEnterFTPrice(){
+    this.total=0;
+    for(let numbers of this.numbersAddedLst){
+      if(this.loteriesSelected.length > 0){
+        for(let lotery of this.loteriesSelected){      
+          if(numbers.isFt && numbers.price == 0){
+            numbers.price = this.priceFt;
+          }
+          this.total += +numbers.price;
+        }
+      }else {
+        if(numbers.isFt){
+          numbers.price = this.priceFt;
+        }
+        this.total += +numbers.price;
+      }
+    }
+    this.priceFt = undefined;
   }
   
   onEnterCunaPrice(){
@@ -256,6 +279,24 @@ export class MainComponent implements OnInit {
     } else {
       for (let i = this.numbersAddedLst.length - 1; i >= 0; i--) {      
         if(this.numbersAddedLst[i].isLt){                              
+          this.total = this.total - this.numbersAddedLst[i].price;
+          this.numbersAddedLst.splice(i,1); 
+        }                                      
+      }  
+    }      
+  }
+
+  firstThree(){
+    this.isFirstThree = !this.isFirstThree;
+    if(this.isFirstThree){
+      for(let numbers of this.numbersAddedLst){              
+        if(numbers.number.length > 3){          
+          this.numbersAddedLst.push({number: numbers.number.substr(0,numbers.number.length-1), price: 0, isFt: true, type: 'Tres primeras'});
+        }
+     }    
+    } else {
+      for (let i = this.numbersAddedLst.length - 1; i >= 0; i--) {      
+        if(this.numbersAddedLst[i].isFt){                              
           this.total = this.total - this.numbersAddedLst[i].price;
           this.numbersAddedLst.splice(i,1); 
         }                                      
