@@ -1,7 +1,7 @@
 <div class="container" *ngIf="isLogged">
     <label class="input-label">Usuario: {{userLogged}}</label>        
     <div class="container__menu">
-        <label class="input-label">Versión: 2.131_1</label>              
+        <label class="input-label">Versión: 2.209_1</label>              
         <button class="bttn bttn-primary"  (click)="forbidden()" *ngIf="isAdmin">Prohibidos</button>
         <button class="bttn bttn-primary" (click)="winners()" *ngIf="isAdmin">Ganadores</button>
         <button class="bttn bttn-primary" (click)="limits()" *ngIf="isAdmin">Cubrir</button>        
@@ -9,6 +9,7 @@
         <button class="bttn bttn-primary" (click)="users()" *ngIf="isAdmin">Usuarios</button>   
         <button class="bttn bttn-primary" (click)="vendors()" *ngIf="isAdmin">Vendedores</button>   
         <button class="bttn bttn-primary" (click)="loteriesBtn()" *ngIf="isAdmin">Loterias</button>   
+        <button class="bttn bttn-primary" (click)="sales()" *ngIf="isAdmin">Ventas</button>   
         <button class="bttn bttn-primary" (click)="logout()">Salir</button> 
         <div>
             <label for="exampleDataList" class="input-label">Últimos ingresados</label>

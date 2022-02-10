@@ -16,6 +16,7 @@ import { ChartsModule } from 'ng2-charts';
 import { UsersComponent } from './users/users.component';
 import { VendorsComponent } from './vendors/vendors.component';
 import { LoteriesComponent } from './loteries/loteries.component';
+import { SalesByVendorComponent } from './sales-by-vendor/sales-by-vendor.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { LoteriesComponent } from './loteries/loteries.component';
     ChartTypedByUserComponent,
     UsersComponent,
     VendorsComponent,
-    LoteriesComponent
+    LoteriesComponent,
+    SalesByVendorComponent
   ],
   imports: [
     BrowserModule,

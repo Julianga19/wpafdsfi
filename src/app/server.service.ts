@@ -96,4 +96,8 @@ export class ServerService {
   graphicsByUser(){
     return this.request('GET', `${environment.serverUrl}/graphicsByUser`);   
   }
+
+  salesByVendor(){
+    return this.request('GET', `${environment.serverUrl}/salesByVendor`);   
+  }
 }

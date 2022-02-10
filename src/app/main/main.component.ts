@@ -553,6 +553,10 @@ export class MainComponent implements OnInit {
     this.router.navigate(['loteries']);
   }
 
+  sales(){
+    this.router.navigate(['sales']);
+  }
+
   logout(){
     sessionStorage.clear();
     this.router.navigate(['login']);  

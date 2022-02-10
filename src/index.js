@@ -10,6 +10,7 @@ const winners = require('./winners');
 const limit = require('./limit');
 const users = require('./users');
 const graphicsByUser = require('./graphicsByUser');
+const salesByVendor = require('./salesByVendor');
 
 
 const connection = mysql.createConnection({
@@ -43,7 +44,8 @@ const app = express()
   .use(winners(connection))
   .use(limit(connection))
   .use(users(connection))
-  .use(graphicsByUser(connection));
+  .use(graphicsByUser(connection))
+  .use(salesByVendor(connection));
 
 app.get('/*', (req, res) => {
   res.sendFile('index.html',{root: 'dist/bet/'});

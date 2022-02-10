@@ -6,6 +6,7 @@ import { LimitsComponent } from './limits/limits.component';
 import { LoginComponent } from './login/login.component';
 import { LoteriesComponent } from './loteries/loteries.component';
 import { MainComponent } from './main/main.component';
+import { SalesByVendorComponent } from './sales-by-vendor/sales-by-vendor.component';
 import { UsersComponent } from './users/users.component';
 import { VendorsComponent } from './vendors/vendors.component';
 import { WinnerComponent } from './winner/winner.component';
@@ -46,6 +47,10 @@ const routes: Routes = [
   {
     path: 'loteries',
     component: LoteriesComponent
+  }, 
+  {
+    path: 'sales',
+    component: SalesByVendorComponent
   }, 
   {
     path: '', redirectTo: 'login', pathMatch: 'full'

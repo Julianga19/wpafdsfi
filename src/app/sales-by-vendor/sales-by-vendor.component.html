@@ -1,0 +1,29 @@
+<div class="container" *ngIf="isLogged">
+    <div class="container__menu">
+        <button class="bttn bttn-primary" (click)="main()">Principal</button>        
+    </div>
+    <div class="container__content">
+        <div>
+            <div class="card">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Vendedor</th>  
+                        <th scope="col">Venta del día</th>                            
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let value of this.data">
+                        <td>{{value.vendor_code}}</td> 
+                        <td>{{value.sale}}</td>                                
+                    </tr>    
+                    <tr>
+                        <td><label class="input-label">Total</label></td>  
+                        <td><label class="input-label">{{sum}}</label></td>
+                    </tr>
+                    </tbody>
+                </table>                                
+            </div>
+        </div>
+    </div>
+</div>
