@@ -5,6 +5,11 @@
     <div class="container__content">
         <div>
             <div class="card">
+                <label for="exampleDataList" class="input-label">Lotería</label>
+                <input class="form-control" list="codeOptions" id="exampleDataList" [(ngModel)]="loterieCode">
+                <datalist id="codeOptions">            
+                    <option *ngFor="let code of loteries" [value]="code.code">{{code.name}}</option>
+                </datalist>       
                 <label class="input-label">Valor</label>
                 <input type="text" class="form-control" [(ngModel)]="maxValue">
                 <label class="label-checkbox">

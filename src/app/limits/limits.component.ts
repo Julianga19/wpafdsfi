@@ -21,7 +21,8 @@ export class LimitsComponent implements OnInit {
   isLoading;
   loteries : Lotery[] = [];  
   loteriesStr: String = '';
-
+  loterieCode;
+  
   constructor(
     public router: Router,
     private server : ServerService,
@@ -29,6 +30,11 @@ export class LimitsComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLogged = sessionStorage.getItem('isLogged');
+    this.server.getEvents().then((response: Lotery[]) => {
+      for(const data of response) {
+        this.loteries.push(data);
+      }
+    });
   }
 
   find(){
@@ -37,15 +43,20 @@ export class LimitsComponent implements OnInit {
     this.loteriesStr = '';
     let limit;    
     limit = this.isThree ? 3 : this.isFour ? 4 : 0;
-    this.server.getEvents().then((response: Lotery[]) => {
-      for(const data of response) {
-        if(this.loteryApplyForDay(data.dayOfWeek, data.dayOfWeekException)){
-          const currentTime = new Date();          
-          if(currentTime.getHours() < data.hourClose){
-            this.loteriesStr = this.loteriesStr + "'" + data.code + "',";
-          }        
+    if(!this.loterieCode) {
+        for(const data of this.loteries) {
+          if(this.loteryApplyForDay(data.dayOfWeek, data.dayOfWeekException)){
+            const currentTime = new Date();          
+            if(currentTime.getHours() < data.hourClose){
+              this.loteriesStr = this.loteriesStr + "'" + data.code + "',";            
+            }        
+          }
         }
-      }          
+        this.loterieCode = this.loteriesStr.substr(0,this.loteriesStr.length-1);  
+      } else {
+        this.loterieCode = "'"+this.loterieCode+"'";
+      }
+            
       let today = new Date().toLocaleDateString('en-US', {
         month: '2-digit',day: '2-digit',year: 'numeric'})      
       var date = new Date(today);    
@@ -53,15 +64,16 @@ export class LimitsComponent implements OnInit {
       var m = date.getMonth() + 1; //Month from 0 to 11
       var y = date.getFullYear();
       var dateParam = y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);            
-      this.server.getPassed(this.maxValue, this.date, limit, dateParam, this.loteriesStr.substr(0,this.loteriesStr.length-1)).then((response: any) => {                                
+      this.server.getPassed(this.maxValue, this.date, limit, dateParam, this.loterieCode).then((response: any) => {                                
         for(const passed of response){
           if(passed.SUMA-passed.COVERED-this.maxValue > 0){        
             this.passedList.push(passed);
           }
         }
         this.isLoading = false;
-      });
-    });    
+        this.loterieCode = '';
+        this.loteriesStr =''
+      });    
   }
 
   cover(){
